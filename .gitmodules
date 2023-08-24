@@ -1,0 +1,6 @@
+[submodule "subprojects/LenovoLegionLinux"]
+	path = subprojects/LenovoLegionLinux
+	url = https://github.com/johnfanv2/LenovoLegionLinux.git
+[submodule "subprojects/darkdetect"]
+	path = subprojects/darkdetect
+	url = https://github.com/albertosottile/darkdetect.git
