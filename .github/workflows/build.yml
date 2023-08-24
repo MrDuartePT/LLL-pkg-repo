@@ -1,0 +1,45 @@
+name: Build
+run-name: ${{ github.actor }} running Build
+on: workflow_dispatch
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+    - name: Clone submodules
+      run: git submodule update --init
+    - name: Install Dependencies
+      run: ./subprojects/LenovoLegionLinux/deploy/dependencies/install_dependencies_ubuntu.sh
+      shell: bash
+  build-release-debs:
+    needs: prepare
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    - name: Update submodules
+      run: git submodule update --init
+      shell: bash
+    - name: Build Deb darkdetect
+      run: ./subprojects/darkdetect_deb/build_deb.sh
+      shell: bash
+    - name: Build Deb LenovoLegionLinux
+      run: |
+        cd subprojects/LenovoLegionLinux/deploy
+        sudo apt-get install /tmp/deb_darkdetect/python3-darkdetect_1.0.0-1_amd64.deb
+        ./build_deb.sh
+      shell: bash
+    - name: Commit packages
+      run: |
+        cp /tmp/deb_darkdetect/python3-darkdetect_1.0.0-1_amd64.deb ./
+        cp /tmp/deb/lenovolegionlinux-dkms_1.0.0_amd64.deb  ./        
+        cp /tmp/deb/python3-legion-linux_1.0.0-1_amd64.deb ./
+        tag=${GITHUB_REF#refs/tags/}
+        git fetch
+        git config user.name github-actions
+        git config user.email github-actions@github.com
+        git add .
+        git commit -m "Add new deb: $tag"
+        git push
