@@ -1,3 +1,5 @@
+![build workflow](https://github.com/MrDuartePT/LLL-pkg-repo/actions/workflows/build.yml/badge.svg)
+
 # LLL-ppa
 A PPA repository for my packages:
 
