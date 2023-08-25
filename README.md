@@ -8,7 +8,7 @@ A PPA repository for my packages:
 
 ```bash
 sudo curl -SsL -o /etc/apt/trusted.gpg.d/lll-ppa.gpg https://MrDuartePT.github.io/LLL-ppa/ubuntu/KEY.gpg
-sudo curl -SsL -o /etc/apt/sources.list.d/lll-ppa.list https://assafmo.github.io/LLL-ppa/ubuntu/lll-ppa.list
+sudo curl -SsL -o /etc/apt/sources.list.d/lll-ppa.list https://MrDuartePT.github.io/LLL-ppa/ubuntu/lll-ppa.list
 sudo apt update
 sudo apt install lenovolegionlinux-dkms python3-darkdetect python3-legion-linux
 ```
