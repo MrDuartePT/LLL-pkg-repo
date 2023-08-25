@@ -1,4 +1,4 @@
-name: Build
+name: Build deb
 run-name: ${{ github.actor }} running Build
 on: 
   push:

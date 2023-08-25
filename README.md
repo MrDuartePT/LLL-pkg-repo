@@ -8,7 +8,7 @@ A PPA repository for my packages:
 
 # Usage
 
-Ubuntu:
+Debian/Ubuntu:
 ```bash
 sudo apt-get install curl gpg
 sudo curl -s https://MrDuartePT.github.io/LLL-pkg-repo/ubuntu/KEY.gpg | gpg --dearmor | sudo tee /usr/share/keyrings/lll-ppa.gpg > /dev/null
@@ -17,6 +17,6 @@ sudo apt update
 sudo apt install lenovolegionlinux-dkms python3-darkdetect python3-legion-linux
 ```
 
-Fedora:
+Fedora/rpm base distros:
 
 Will be add in the future
