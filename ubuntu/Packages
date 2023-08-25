@@ -2,14 +2,14 @@ Package: lenovolegionlinux-dkms
 Version: 1.0.0
 Architecture: amd64
 Maintainer: Dynamic Kernel Modules Support Team <pkg-dkms-maint@lists.alioth.debian.org>
-Installed-Size: 254
+Installed-Size: 255
 Depends: dkms (>= 1.95)
 Provides: lenovolegionlinux-modules (= 1.0.0)
 Filename: ./lenovolegionlinux-dkms_1.0.0_amd64.deb
-Size: 46690
-MD5sum: 06b9ca34aff4551b64f6559edf6526f5
-SHA1: 64378b008753b778ce750b27d0d43cd386070ae7
-SHA256: 4a0efb72e312376d9e1304bd662aef9adac83f958900dcc33ab4e6f7ab659208
+Size: 46738
+MD5sum: 7132348ccf260d2b9e95c2c238cca659
+SHA1: 04831a3e0895f6f23c91090ef373fabea8bded10
+SHA256: 31ffc230ade5a731a51bc342211fcf0df1d71bc866250ba54f5f75dc2830dfb2
 Section: misc
 Priority: optional
 Description: lenovolegionlinux driver in DKMS format.
@@ -21,10 +21,10 @@ Architecture: all
 Maintainer: albertosottile <albertosottile@example.org>
 Installed-Size: 14
 Filename: ./python3-darkdetect_1.0.0-1_amd64.deb
-Size: 1506
-MD5sum: 8e60ea29fdd6cae56d5ac9c84735ce99
-SHA1: 5b6511b0e5df0db82380136ebead2b53541056df
-SHA256: a8f8319684fa6fc2d47aa88eea0f4fdbb1d8ab2a254b83a59a84aa537564c7b0
+Size: 1508
+MD5sum: f287d8db2f41d4bd824312d02775e553
+SHA1: 13196398b8941d94edfbda4ab5e4559991c7b852
+SHA256: 3c2e62abd5634f27bea5e81d23cc7cafe4b487ba212eb00e4316b1ba6ebc1d50
 Section: python
 Priority: optional
 Homepage: https://github.com/albertosottile/darkdetect
@@ -36,13 +36,13 @@ Source: legion-linux
 Version: 1.0.0-1
 Architecture: all
 Maintainer: johnfan <johnfan@example.org>
-Installed-Size: 200
+Installed-Size: 201
 Depends: python3-argcomplete, python3-pyqt5, python3-yaml, python3:any
 Filename: ./python3-legion-linux_1.0.0-1_amd64.deb
-Size: 30026
-MD5sum: 49a6af85a19c61bde9c5c4d6a5d5dcef
-SHA1: adcfb4687da5450b6a50aa7d8617899448cfb83b
-SHA256: 8f4e014bb700a02f34cc4ace3ec4766612da3e8aefc029ec1812ec7c686ce6fe
+Size: 30114
+MD5sum: d597844ad2badc29f4800244e77870e5
+SHA1: b07b938769cda186fe56aaccabbbca18b657ac55
+SHA256: 1d0ffd72af6a95be50c8356dd48a864b9c51d4ff18a02876b8c38a122193ca2e
 Section: python
 Priority: optional
 Homepage: https://github.com/johnfanv2/LenovoLegionLinux
