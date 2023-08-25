@@ -45,7 +45,7 @@ jobs:
         apt-ftparchive release . > Release
         gpg --default-key "${{ secrets.GPG_ID }}" -abs -o - Release > Release.gpg
         gpg --default-key "${{ secrets.GPG_ID }}" --clearsign -o - Release > InRelease
-        echo "deb [signed-by=/etc/apt/trusted.gpg.d/lll-ppa.gpg] https://${{ github.repository_owner }}.github.io/${{ github.repository }} ./" > my_list_file.list
+        echo "deb https://${{ github.repository_owner }}.github.io/LLL-ppa ./" > lll-ppa.list
       shell: bash
 
     - name: Commit changes
