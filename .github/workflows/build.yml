@@ -8,7 +8,7 @@ on:
     # Runs at midnight UTC every day (see https://crontab.guru)
     - cron: '0 0 * * *'
 jobs:
-  build-release-debs:
+  build-release-debs-rpms:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
@@ -25,7 +25,7 @@ jobs:
       run: ./subprojects/LenovoLegionLinux/deploy/dependencies/install_dependencies_ubuntu.sh
       shell: bash
 
-    - name: Build Deb darkdetect
+    - name: Build pkgs darkdetect
       run: ./subprojects/darkdetect_deb/build_rpm_deb.sh
       shell: bash
 
