@@ -1,1 +1,1 @@
-deb [signed-by=/usr/share/keyrings/lll-ppa.gpg] https://MrDuartePT.github.io/LLL-ppa/ubuntu ./
+deb [signed-by=/usr/share/keyrings/lll-ppa.gpg] https://MrDuartePT.github.io/LLL-pkg-repo/ubuntu ./
