@@ -2,44 +2,60 @@ name: Build
 run-name: ${{ github.actor }} running Build
 on: workflow_dispatch
 jobs:
-  prepare:
+  build-release-debs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
       uses: actions/checkout@v3
+
     - name: Clone submodules
       run: git submodule update --init
+      shell: bash
+
     - name: Install Dependencies
       run: ./subprojects/LenovoLegionLinux/deploy/dependencies/install_dependencies_ubuntu.sh
       shell: bash
-  build-release-debs:
-    needs: prepare
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
-      with:
-        fetch-depth: 0
-    - name: Update submodules
-      run: git submodule update --init
-      shell: bash
+
     - name: Build Deb darkdetect
       run: ./subprojects/darkdetect_deb/build_deb.sh
       shell: bash
+
     - name: Build Deb LenovoLegionLinux
       run: |
         cd subprojects/LenovoLegionLinux/deploy
         sudo apt-get install /tmp/deb_darkdetect/python3-darkdetect_1.0.0-1_amd64.deb
         ./build_deb.sh
       shell: bash
-    - name: Commit packages
+
+    - name: Import GPG key
+      uses: crazy-max/ghaction-import-gpg@v5
+      with:
+        gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
+        passphrase: ${{ secrets.PASSPHRASE }}
+
+      name: Copy and Generate files
       run: |
+        cd ubuntu
         cp /tmp/deb_darkdetect/python3-darkdetect_1.0.0-1_amd64.deb ./
-        cp /tmp/deb/lenovolegionlinux-dkms_1.0.0_amd64.deb  ./        
+        cp /tmp/deb/lenovolegionlinux-dkms_1.0.0_amd64.deb  ./    
         cp /tmp/deb/python3-legion-linux_1.0.0-1_amd64.deb ./
+        gpg --armor --export "${{ GPG_ID }}" > ./KEY.gpg
+        dpkg-scanpackages --multiversion . > Packages
+        gzip -k -f Packages
+        apt-ftparchive release . > Release
+        gpg --default-key "${{ GPG_ID }}" -abs -o - Release > Release.gpg
+        gpg --default-key "${{ GPG_ID }}" --clearsign -o - Release > InRelease
+        echo "deb [signed-by=/etc/apt/trusted.gpg.d/my_ppa.gpg] https://${{ github.repository_owner }}.github.io/${{ github.repository }} ./" > my_list_file.list
+
+      shell: bash
+
+    - name: Commit changes
+      run: |
         tag=${GITHUB_REF#refs/tags/}
         git fetch
         git config user.name github-actions
         git config user.email github-actions@github.com
-        git add .
+        git add -A
         git commit -m "Add new deb: $tag"
         git push
+      shell: bash
