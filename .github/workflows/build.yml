@@ -33,20 +33,19 @@ jobs:
         gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
         passphrase: ${{ secrets.PASSPHRASE }}
 
-      name: Copy and Generate files
+    - name: Copy and Generate files
       run: |
         cd ubuntu
         cp /tmp/deb_darkdetect/python3-darkdetect_1.0.0-1_amd64.deb ./
         cp /tmp/deb/lenovolegionlinux-dkms_1.0.0_amd64.deb  ./    
         cp /tmp/deb/python3-legion-linux_1.0.0-1_amd64.deb ./
-        gpg --armor --export "${{ GPG_ID }}" > ./KEY.gpg
+        gpg --armor --export "${{ secrets.GPG_ID }}" > ./KEY.gpg
         dpkg-scanpackages --multiversion . > Packages
         gzip -k -f Packages
         apt-ftparchive release . > Release
-        gpg --default-key "${{ GPG_ID }}" -abs -o - Release > Release.gpg
-        gpg --default-key "${{ GPG_ID }}" --clearsign -o - Release > InRelease
-        echo "deb [signed-by=/etc/apt/trusted.gpg.d/my_ppa.gpg] https://${{ github.repository_owner }}.github.io/${{ github.repository }} ./" > my_list_file.list
-
+        gpg --default-key "${{ secrets.GPG_ID }}" -abs -o - Release > Release.gpg
+        gpg --default-key "${{ secrets.GPG_ID }}" --clearsign -o - Release > InRelease
+        echo "deb [signed-by=/etc/apt/trusted.gpg.d/lll-ppa.gpg] https://${{ github.repository_owner }}.github.io/${{ github.repository }} ./" > my_list_file.list
       shell: bash
 
     - name: Commit changes
