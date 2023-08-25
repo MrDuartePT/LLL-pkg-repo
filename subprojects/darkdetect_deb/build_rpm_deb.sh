@@ -22,3 +22,7 @@ cd deb_dist/darkdetect-1.0.0
 # Build package
 sudo dpkg-buildpackage -uc -us
 cp ../python3-darkdetect_1.0.0-1_all.deb ${BUILD_DIR}/python3-darkdetect_1.0.0-1_amd64.deb
+
+#Convert to RPM
+cd ${BUILD_DIR}
+sudo alien -r  -c -v ./python3-darkdetect_1.0.0-1_amd64.deb

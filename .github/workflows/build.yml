@@ -1,4 +1,4 @@
-name: Build deb
+name: Build
 run-name: ${{ github.actor }} running Build
 on: 
   push:
@@ -26,14 +26,14 @@ jobs:
       shell: bash
 
     - name: Build Deb darkdetect
-      run: ./subprojects/darkdetect_deb/build_deb.sh
+      run: ./subprojects/darkdetect_deb/build_rpm_deb.sh
       shell: bash
 
-    - name: Build Deb LenovoLegionLinux
+    - name: Build pkgs LenovoLegionLinux
       run: |
         cd subprojects/LenovoLegionLinux/deploy
         sudo apt-get install /tmp/deb_darkdetect/python3-darkdetect_1.0.0-1_amd64.deb
-        ./build_deb.sh
+        ./build_rpm_deb.sh
       shell: bash
 
     - name: Import GPG key
@@ -42,7 +42,7 @@ jobs:
         gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
         passphrase: ${{ secrets.PASSPHRASE }}
 
-    - name: Copy and Generate files
+    - name: Copy and Generate files - Ubuntu
       run: |
         cd ubuntu
         cp /tmp/deb_darkdetect/python3-darkdetect_1.0.0-1_amd64.deb ./
