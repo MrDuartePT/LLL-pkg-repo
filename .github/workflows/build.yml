@@ -57,8 +57,8 @@ jobs:
       run: |
         cd ubuntu
         cp /tmp/deb_darkdetect/python3-darkdetect_1.0.0-1_amd64.deb ./
-        cp /tmp/deb/lenovolegionlinux-dkms_1.0.0_amd64.deb  ./    
-        cp /tmp/deb/python3-legion-linux_1.0.0-1_amd64.deb ./
+        cp /tmp/pkg/lenovolegionlinux-dkms_1.0.0_amd64.deb  ./    
+        cp /tmp/pkg/python3-legion-linux_1.0.0-1_amd64.deb ./
         gpg --armor --export "${{ secrets.GPG_ID }}" > ./KEY.gpg
         dpkg-scanpackages --multiversion . > Packages
         gzip -k -f Packages
@@ -68,12 +68,23 @@ jobs:
         echo "deb [signed-by=/usr/share/keyrings/lll-ppa.gpg] https://${{ github.repository_owner }}.github.io/LLL-pkg-repo/ubuntu ./" > lll-ppa.list
       shell: bash
 
-    - name: Copy and Generate files - Ubuntu
+    - name: Copy and Generate files - Fedora
       run: |
+        sudo apt-get install createrepo-c
         cd fedora
-        cp /tmp/deb_darkdetect/python3-darkdetect_1.0.0-1_amd64.rpm ./
-        cp /tmp/pkg/lenovolegionlinux-dkms_1.0.0_amd64.rpm  ./    
-        cp /tmp/pkg/python3-legion-linux_1.0.0-1_amd64.rpm ./
+        cp /tmp/deb_darkdetect/python3-darkdetect-1.0.0-2.noarch.rpm ./packages/python3-darkdetect-1.0.0-1.amd64.rpm
+        cp /tmp/pkg/lenovolegionlinux-1.0-0.src.rpm  ./packages 
+        cp /tmp/pkg/python3-legion-linux-1.0.0-1.amd64.rpm ./packages
+
+        gpg --armor --export "${{ secrets.GPG_ID }}" > ./pgp-key.public
+        gpg --detach-sign --armor "${{ secrets.GPG_ID }}" repodata/repomd.xml
+
+        echo "[LLL-pkg-repo]
+        name=LLL-pkg-repo
+        baseurl=https://$\{\{ github.repository_owner }}.github.io/LLL-pkg-repo/fedora/packages
+        enabled=1
+        gpgcheck=1
+        gpgkey=https://$\{\{ github.repository_owner }}.github.io/LLL-pkg-repo/fedora/pgp-key.public" > ./LLL.repo
       shell: bash
 
     - name: Commit changes
