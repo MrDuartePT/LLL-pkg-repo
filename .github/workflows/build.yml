@@ -57,6 +57,14 @@ jobs:
         echo "deb [signed-by=/usr/share/keyrings/lll-ppa.gpg] https://${{ github.repository_owner }}.github.io/LLL-pkg-repo/ubuntu ./" > lll-ppa.list
       shell: bash
 
+    - name: Copy and Generate files - Ubuntu
+      run: |
+        cd fedora
+        cp /tmp/deb_darkdetect/python3-darkdetect_1.0.0-1_amd64.rpm ./
+        cp /tmp/pkg/lenovolegionlinux-dkms_1.0.0_amd64.rpm  ./    
+        cp /tmp/pkg/python3-legion-linux_1.0.0-1_amd64.rpm ./
+      shell: bash
+
     - name: Commit changes
       run: |
         tag=${GITHUB_REF#refs/tags/}
