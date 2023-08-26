@@ -17,6 +17,7 @@ sudo apt update
 sudo apt install lenovolegionlinux-dkms python3-darkdetect python3-legion-linux
 ```
 
+FOR NOW FEDORA RPM ARE COMPLETY BROKEN. YOU CAN ADD THE REPO BUT THE RPM NOT WORK
 Fedora/rpm base distros:
 
 ```bash
