@@ -72,17 +72,16 @@ jobs:
         sudo apt-get install createrepo-c
         cd fedora
         gpg --armor --export "${{ secrets.GPG_ID }}" > ./pgp-key.public
-        cp /tmp/deb_darkdetect/python3-darkdetect-1.0.0-2.noarch.rpm ./packages/python3-darkdetect-1.0.0-1.amd64.rpm
+        cp /tmp/deb_darkdetect/python-darkdetect-1.0.0-1.src.rpm ./packages
         cp /tmp/pkg/lenovolegionlinux-1.0-0.src.rpm  ./packages 
-        cp /tmp/pkg/python3-legion-linux-1.0.0-1.amd64.rpm ./packages
+        cp /tmp/pkg/python-lenovolegionlinux-1.0-0.src.rpm ./packages
 
         sudo rpm --import pgp-key.public
         echo "%_signature gpg
         %_gpg_name Package Manager" > ~/.rpmmacros
         rpm --addsign ./packages/*.rpm
-        rm packages/repodata/repomd.xml || true
-        rm packages/repodata/repomd.xml.asc || true
         cd packages
+        rm repodata/* || true
         createrepo_c .
         gpg --batch --detach-sign --armor repodata/repomd.xml
 
