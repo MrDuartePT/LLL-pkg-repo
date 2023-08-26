@@ -51,7 +51,6 @@ jobs:
       uses: crazy-max/ghaction-import-gpg@v5
       with:
         gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
-        passphrase: ${{ secrets.PASSPHRASE }}
 
     - name: Copy and Generate files - Ubuntu
       run: |
@@ -72,10 +71,25 @@ jobs:
       run: |
         sudo apt-get install createrepo-c
         cd fedora
+        gpg --armor --export "${{ secrets.GPG_ID }}" > ./pgp-key.public
         cp /tmp/deb_darkdetect/python3-darkdetect-1.0.0-2.noarch.rpm ./packages/python3-darkdetect-1.0.0-1.amd64.rpm
         cp /tmp/pkg/lenovolegionlinux-1.0-0.src.rpm  ./packages 
         cp /tmp/pkg/python3-legion-linux-1.0.0-1.amd64.rpm ./packages
 
+        sudo rpm --import pgp-key.public
+        echo "%_signature gpg
+        %_gpg_name Package Manager" > ~/.rpmmacros
+        rpm --addsign ./packages/*.rpm
+        rm repodata/* || true
+        touch repodata/repomd.xml
+        gpg --batch --detach-sign --armor repodata/repomd.xml
+
+        echo "[LLL-pkg-repo]
+        name=LLL-pkg-repo
+        baseurl=https://$\{\{ github.repository_owner }}.github.io/LLL-pkg-repo/fedora/packages
+        enabled=1
+        gpgcheck=1
+        gpgkey=https://$\{\{ github.repository_owner }}.github.io/LLL-pkg-repo/fedora/pgp-key.public" > ./LLL.repo
       shell: bash
 
     - name: Commit changes

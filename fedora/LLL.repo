@@ -1,6 +1,0 @@
-[example-repo]
-name=LLL-pkg-repo
-baseurl=https://$\{\{ github.repository_owner }}.github.io/LLL-pkg-repo/fedora/packages
-enabled=1
-gpgcheck=1
-gpgkey=https://$\{\{ github.repository_owner }}.github.io/LLL-pkg-repo/fedora/pgp-key.public
