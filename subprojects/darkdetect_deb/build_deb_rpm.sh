@@ -34,4 +34,4 @@ tar --create --file darkdetect-1.0.0.tar.gz darkdetect-1.0.0
 mv darkdetect-1.0.0.tar.gz rpmbuild/SOURCES
 cd rpmbuild
 rpmbuild --define "_topdir `pwd`" -bs SPECS/darkdetect.spec
-mv ${BUILD_DIR}/rpmbuild/SRPMS/darkdetect-1.0.0-1.src.rpm ${BUILD_DIR}/
+mv ${BUILD_DIR}/rpmbuild/SRPMS/python-darkdetect-1.0.0-1.src.rpm ${BUILD_DIR}/
