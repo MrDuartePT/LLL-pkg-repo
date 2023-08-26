@@ -74,7 +74,7 @@ jobs:
         gpg --armor --export "${{ secrets.GPG_ID }}" > ./pgp-key.public
         cp /tmp/deb_darkdetect/python-darkdetect-1.0.0-1.src.rpm ./packages
         cp /tmp/pkg/lenovolegionlinux-1.0-0.src.rpm  ./packages 
-        cp /tmp/pkg/python-lenovolegionlinux-1.0-0.src.rpm ./packages
+        cp /tmp/pkg/python-lenovolegionlinux-1.0.0-1.src.rpm ./packages
 
         sudo rpm --import pgp-key.public
         echo "%_signature gpg
