@@ -80,6 +80,7 @@ jobs:
         echo "%_signature gpg
         %_gpg_name Package Manager" > ~/.rpmmacros
         rpm --addsign ./packages/*.rpm
+        createrepo_c .
         rm repodata/* || true
         touch repodata/repomd.xml
         gpg --batch --detach-sign --armor repodata/repomd.xml
