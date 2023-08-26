@@ -11,10 +11,11 @@ mkdir -p "${BUILD_DIR}"
 
 ## BUILD DKMS DEB
 #Setup BUILD_DIR
-cp --recursive subprojects/darkdetect_deb/* ${BUILD_DIR}/
-cp --recursive subprojects/rpmbuild-darkdetect/* ${BUILD_DIR}/
+cp --recursive subprojects/darkdetect_deb ${BUILD_DIR}/
+cp --recursive subprojects/darkdetect_deb ${BUILD_DIR}/darkdetect-1.0.0
+cp --recursive subprojects/darkdetect.spec ${BUILD_DIR}/
 
-cd ${BUILD_DIR}
+cd ${BUILD_DIR}/darkdetect_deb
 
 # Create package sceleton
 sudo python3 setup.py --command-packages=stdeb.command sdist_dsc
@@ -25,9 +26,10 @@ sudo dpkg-buildpackage -uc -us
 cp ../python3-darkdetect_1.0.0-1_all.deb ${BUILD_DIR}/python3-darkdetect_1.0.0-1_amd64.deb
 
 #Create rpm
+cd ${BUILD_DIR}
 mkdir -p rpmbuild/{BUILD,BUILDROOT,RPMS,SOURCES,SPECS,SRPMS}
-cp darkdetect.spec rpmbuild/SPECS
-cd ../ && cp -r darkdetect_deb darkdetect-1.0.0 && rm darkdetect-1.0.0/build_deb_rpm.sh
+mv darkdetect.spec rpmbuild/SPECS
+rm darkdetect-1.0.0/build_deb_rpm.sh
 tar --create --file darkdetect-1.0.0.tar.gz darkdetect-1.0.0
 mv darkdetect-1.0.0.tar.gz rpmbuild/SOURCES
 cd rpmbuild
