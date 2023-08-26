@@ -80,17 +80,18 @@ jobs:
         echo "%_signature gpg
         %_gpg_name Package Manager" > ~/.rpmmacros
         rpm --addsign ./packages/*.rpm
+        rm package/repodata/repomd.xml || true
+        rm package/repodata/repomd.xml.asc || true
+        cd package
         createrepo_c .
-        rm repodata/* || true
-        touch repodata/repomd.xml
         gpg --batch --detach-sign --armor repodata/repomd.xml
 
         echo "[LLL-pkg-repo]
         name=LLL-pkg-repo
-        baseurl=https://$\{\{ github.repository_owner }}.github.io/LLL-pkg-repo/fedora/packages
+        baseurl=https://mrduartept.github.io/LLL-pkg-repo/fedora/packages
         enabled=1
         gpgcheck=1
-        gpgkey=https://$\{\{ github.repository_owner }}.github.io/LLL-pkg-repo/fedora/pgp-key.public" > ./LLL.repo
+        gpgkey=https://mrduartept.github.io/LLL-pkg-repo/fedora/pgp-key.public" > ./LLL.repo
       shell: bash
 
     - name: Commit changes
