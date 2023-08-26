@@ -76,15 +76,6 @@ jobs:
         cp /tmp/pkg/lenovolegionlinux-1.0-0.src.rpm  ./packages 
         cp /tmp/pkg/python3-legion-linux-1.0.0-1.amd64.rpm ./packages
 
-        gpg --armor --export "${{ secrets.GPG_ID }}" > ./pgp-key.public
-        gpg --detach-sign --armor "${{ secrets.GPG_ID }}" repodata/repomd.xml
-
-        echo "[LLL-pkg-repo]
-        name=LLL-pkg-repo
-        baseurl=https://$\{\{ github.repository_owner }}.github.io/LLL-pkg-repo/fedora/packages
-        enabled=1
-        gpgcheck=1
-        gpgkey=https://$\{\{ github.repository_owner }}.github.io/LLL-pkg-repo/fedora/pgp-key.public" > ./LLL.repo
       shell: bash
 
     - name: Commit changes
