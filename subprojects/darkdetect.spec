@@ -1,6 +1,6 @@
-%define name python-darkdetect
-%define version 0.8.0
-%define unmangled_version 0.8.0
+%define name python3-darkdetect
+%define version _VERSION
+%define unmangled_version _VERSION
 %define release 1
 
 Summary: Detect OS Dark Mode from Python

@@ -55,7 +55,6 @@ jobs:
     - name: Copy and Generate files - Ubuntu
       run: |
         cd ubuntu
-        cp /tmp/darkdetect_pkg/python3-darkdetect_0.8.0-1_all.deb ./
         cp /tmp/pkg/lenovolegionlinux-dkms_1.0.0_amd64.deb  ./    
         cp /tmp/pkg/python3-legion-linux_1.0.0-1_all.deb ./
         gpg --armor --export "${{ secrets.GPG_ID }}" > ./KEY.gpg
@@ -72,8 +71,8 @@ jobs:
         sudo apt-get install createrepo-c
         cd fedora
         gpg --armor --export "${{ secrets.GPG_ID }}" > ./pgp-key.public
-        cp /tmp/darkdetect_pkg/python-darkdetect-0.8.0-1.noarch.rpm ./packages
         cp /tmp/pkg/python-lenovolegionlinux-1.0.0-1.noarch.rpm  ./packages
+        cp /tmp/pkg/dkms-lenovolegionlinux-1.0.0-0.x86_64.rpm ./packages
 
         sudo rpm --import pgp-key.public
         echo "%_signature gpg
