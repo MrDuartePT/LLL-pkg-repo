@@ -2,14 +2,14 @@ Package: lenovolegionlinux-dkms
 Version: 1.0.0
 Architecture: amd64
 Maintainer: Dynamic Kernel Modules Support Team <pkg-dkms-maint@lists.alioth.debian.org>
-Installed-Size: 257
+Installed-Size: 258
 Depends: dkms (>= 1.95)
 Provides: lenovolegionlinux-modules (= 1.0.0)
 Filename: ./lenovolegionlinux-dkms_1.0.0_amd64.deb
-Size: 47168
-MD5sum: 7ca52f1054418bea920bea2081364272
-SHA1: cea7841c886bf301ccf9e38fe32e17141f17437b
-SHA256: 4d11b8ffff9ed9523354a50ce8c2224448adf3baa3f4f8adce9c0d0f49e61378
+Size: 47254
+MD5sum: 8b050ac8a51766ba5a9b5c3456802a8f
+SHA1: 600dc98a135ef3864f2c0825f52d9425ab0352b1
+SHA256: 7375c2e63edfe230aef17973cf88fe1b7912208fda0cf73de08040c4a58cd854
 Section: misc
 Priority: optional
 Description: lenovolegionlinux driver in DKMS format.
@@ -22,10 +22,10 @@ Maintainer: albertosottile <albertosottile@example.org>
 Installed-Size: 35
 Depends: python3:any
 Filename: ./python3-darkdetect_0.8.0-1_all.deb
-Size: 7226
-MD5sum: b2062c99e89848783fea0bff5e3d36f8
-SHA1: 146a0da91862ae6ab881f3b139d1632ff9ce32d9
-SHA256: 526182065a5dd52f07c4a020344beb0dc0b1484ed3dadd66c46e449ee2a8c69b
+Size: 7224
+MD5sum: f4a6c868537a051708b4a332398e5353
+SHA1: eefac51e3806f36dea928ab5f86695ec4a5072a6
+SHA256: 9163a0372f9318ca03662c4f26bc541ee9316018774e8e00437a1d423679d09c
 Section: python
 Priority: optional
 Homepage: https://github.com/albertosottile/darkdetect
@@ -51,23 +51,6 @@ Description: Detect OS Dark Mode from Python
  .
  >>> darkdetect.isDark()
 
-Package: python3-darkdetect
-Source: darkdetect
-Version: 1.0.0-1
-Architecture: all
-Maintainer: albertosottile <albertosottile@example.org>
-Installed-Size: 14
-Filename: ./python3-darkdetect_1.0.0-1_amd64.deb
-Size: 1512
-MD5sum: 77ddb5a50c358bc6553dcabde6eb6b29
-SHA1: 63727c4aaba894fdfa12e4d0f27887b7269c6ce8
-SHA256: b968bf1fa0aa6e478ec1be51d2beda403ba8994081c4dfe8a5ab1ca1aad73676
-Section: python
-Priority: optional
-Homepage: https://github.com/albertosottile/darkdetect
-Description: Detect OS Dark Mode from Python
- See https://github.com/albertosottile/darkdetect
-
 Package: python3-legion-linux
 Source: legion-linux
 Version: 1.0.0-1
@@ -76,28 +59,10 @@ Maintainer: johnfan <johnfan@example.org>
 Installed-Size: 202
 Depends: python3-argcomplete, python3-pyqt5, python3-yaml, python3:any
 Filename: ./python3-legion-linux_1.0.0-1_all.deb
-Size: 30402
-MD5sum: 47370405a2d5204b6a56ca91d5fe8310
-SHA1: e81e4841990937c8a1b6398251d53a733910fc81
-SHA256: cf4bfbeb994d8fe055aaa4bc79cfdc02f24a3822d837724689a81808dbb88c3d
-Section: python
-Priority: optional
-Homepage: https://github.com/johnfanv2/LenovoLegionLinux
-Description: Control Lenovo Legion laptop
- See documenation of LenovoLegionLinux
-
-Package: python3-legion-linux
-Source: legion-linux
-Version: 1.0.0-1
-Architecture: all
-Maintainer: johnfan <johnfan@example.org>
-Installed-Size: 201
-Depends: python3-argcomplete, python3-pyqt5, python3-yaml, python3:any
-Filename: ./python3-legion-linux_1.0.0-1_amd64.deb
-Size: 30104
-MD5sum: 7acfb66237fb00f5879eac513098354d
-SHA1: 21c993bc98ec682cd8746906a2c5b4166e47c0c3
-SHA256: 8cc975043ac829c5b55e2e52d29319da2e650400bbe197c50a8dd512ab6eb0c2
+Size: 30372
+MD5sum: 6278c6e4a329db68f972d8a2922f7dae
+SHA1: fab45169a8f95b429a52ea31178487a2e00dadfb
+SHA256: c40af78798ffef11d02a4a241628db38c05a655fd4eb6c2be5ad683fc5e8da05
 Section: python
 Priority: optional
 Homepage: https://github.com/johnfanv2/LenovoLegionLinux
