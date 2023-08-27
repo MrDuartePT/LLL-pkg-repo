@@ -17,12 +17,13 @@ sudo apt update
 sudo apt install lenovolegionlinux-dkms python3-darkdetect python3-legion-linux
 ```
 
-FOR NOW FEDORA RPM ARE COMPLETY BROKEN. YOU CAN ADD THE REPO BUT THE RPM NOT WORK
 Fedora/rpm base distros:
 
 ```bash
 sudo curl -s https://MrDuartePT.github.io/LLL-pkg-repo/fedora/LLL.repo | sudo tee /etc/yum.repos.d/LLL.repo > /dev/null
 sudo dnf config-manager --add-repo /etc/yum.repos.d/LLL.repo
 sudo dnf config-manager --set-enabled LLL-pkg-repo
-sudo dnf install python3-darkdetect python3-legion-linux lenovolegionlinux
+sudo dnf install python-darkdetect python-legion-linux
 ```
+
+Note for Fedora: DKMS package will be added later
