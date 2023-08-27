@@ -37,14 +37,13 @@ jobs:
       shell: bash
 
     - name: Build pkgs darkdetect
-      run: ./subprojects/build_deb_rpm.sh
+      run: ./subprojects/build_deb_rpm_darkdetect.sh
       shell: bash
 
     - name: Build pkgs LenovoLegionLinux
       run: |
-        cd subprojects/LenovoLegionLinux/deploy
         sudo apt-get install /tmp/darkdetect_pkg/python3-darkdetect_0.8.0-1_all.deb
-        ./build_deb_rpm.sh
+        ./subprojects/build_deb_rpm_LLL.sh
       shell: bash
 
     - name: Import GPG key
