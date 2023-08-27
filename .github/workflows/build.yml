@@ -37,13 +37,13 @@ jobs:
       shell: bash
 
     - name: Build pkgs darkdetect
-      run: ./subprojects/darkdetect_deb/build_deb_rpm.sh
+      run: ./subprojects/build_deb_rpm.sh
       shell: bash
 
     - name: Build pkgs LenovoLegionLinux
       run: |
         cd subprojects/LenovoLegionLinux/deploy
-        sudo apt-get install /tmp/deb_darkdetect/python3-darkdetect_1.0.0-1_amd64.deb
+        sudo apt-get install /tmp/darkdetect_pkg/python3-darkdetect_0.8.0-1_all.deb
         ./build_deb_rpm.sh
       shell: bash
 
@@ -55,9 +55,9 @@ jobs:
     - name: Copy and Generate files - Ubuntu
       run: |
         cd ubuntu
-        cp /tmp/deb_darkdetect/python3-darkdetect_1.0.0-1_amd64.deb ./
+        cp /tmp/darkdetect_pkg/python3-darkdetect_0.8.0-1_all.deb ./
         cp /tmp/pkg/lenovolegionlinux-dkms_1.0.0_amd64.deb  ./    
-        cp /tmp/pkg/python3-legion-linux_1.0.0-1_amd64.deb ./
+        cp /tmp/pkg/python3-legion-linux_1.0.0-1_all.deb ./
         gpg --armor --export "${{ secrets.GPG_ID }}" > ./KEY.gpg
         dpkg-scanpackages --multiversion . > Packages
         gzip -k -f Packages
@@ -72,9 +72,8 @@ jobs:
         sudo apt-get install createrepo-c
         cd fedora
         gpg --armor --export "${{ secrets.GPG_ID }}" > ./pgp-key.public
-        cp /tmp/deb_darkdetect/python-darkdetect-1.0.0-1.src.rpm ./packages
-        cp /tmp/pkg/lenovolegionlinux-1.0-0.src.rpm  ./packages 
-        cp /tmp/pkg/python-lenovolegionlinux-1.0.0-1.src.rpm ./packages
+        cp /tmp/darkdetect_pkg/python-darkdetect-0.8.0-1.noarch.rpm ./packages
+        cp /tmp/pkg/python-lenovolegionlinux-1.0.0-1.noarch.rpm  ./packages
 
         sudo rpm --import pgp-key.public
         echo "%_signature gpg
