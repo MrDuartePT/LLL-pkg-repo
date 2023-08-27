@@ -17,6 +17,9 @@ Vendor: albertosottile <Alberto Sottile <asottile@gmail.com>>
 Packager: Gonçalo Negrier Duarte <gonegrier.duarte@gamil.com>
 Url: https://github.com/albertosottile/darkdetect
 
+Requires:     python-build
+Requires:     python-setuptools
+
 %description
 # Darkdetect
 
@@ -94,6 +97,3 @@ python -m installer --destdir="$RPM_BUILD_ROOT" dist/*.whl
 
 %clean
 rm -rf $RPM_BUILD_ROOT
-
-%files -f INSTALLED_FILES
-%defattr(-,root,root)
