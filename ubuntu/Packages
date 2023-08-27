@@ -6,10 +6,10 @@ Installed-Size: 258
 Depends: dkms (>= 1.95)
 Provides: lenovolegionlinux-modules (= 1.0.0)
 Filename: ./lenovolegionlinux-dkms_1.0.0_amd64.deb
-Size: 47164
-MD5sum: d8a51ef99458d773cfc5873e4544602c
-SHA1: 454b695ed25157ad5be3a5dc6fc7ef954838629e
-SHA256: e07fbfb4fcad6d15f10e1b7961470af20fd734159b37f4dcbcb79ba1da844d70
+Size: 47160
+MD5sum: f548414c9ee00cf703068764a65c6694
+SHA1: d62062382183f38533c8bd2ac49193a3d9184ab1
+SHA256: f5090f4aa71c70666e5eb5754518b113335267481d375b2ec2f87d588ea2d69b
 Section: misc
 Priority: optional
 Description: lenovolegionlinux driver in DKMS format.
@@ -59,10 +59,10 @@ Maintainer: johnfan <johnfan@example.org>
 Installed-Size: 202
 Depends: python3-argcomplete, python3-pyqt5, python3-yaml, python3:any
 Filename: ./python3-legion-linux_1.0.0-1_all.deb
-Size: 30392
-MD5sum: 2ad80b474e83ffa96e032f258964ffa5
-SHA1: cc13e8edad61d2d75fd048a69b88f3693e57009a
-SHA256: bedc5ad79b0cf178fdec58bea5c6a2012c95fad4bc476634c82aeba873b559a6
+Size: 30394
+MD5sum: dfcddd79082e1bde4df18b0cb5c8e2d3
+SHA1: 5ed0fe97ae8730237f1c1bb431346785df21cfcd
+SHA256: bf9e355c24d3bb5b9ab1a7aff5467def900d99b8c010553d735a9d8dde049b37
 Section: python
 Priority: optional
 Homepage: https://github.com/johnfanv2/LenovoLegionLinux
