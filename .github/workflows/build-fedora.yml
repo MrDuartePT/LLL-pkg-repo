@@ -61,15 +61,6 @@ jobs:
         rpm --addsign ./packages/*.rpm
         cd packages
         rm repodata/* || true
-        rm ./LLL.repo || true
-
-        echo "[LLL-pkg-repo]
-        name=LLL-pkg-repo
-        baseurl=https://mrduartept.github.io/LLL-pkg-repo/fedora/packages
-        enabled=1
-        gpgcheck=1
-        gpgkey=https://mrduartept.github.io/LLL-pkg-repo/fedora/pgp-key.public" > ./LLL.repo
-
         createrepo_c .
         gpg --batch --detach-sign --armor repodata/repomd.xml
 

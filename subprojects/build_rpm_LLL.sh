@@ -58,3 +58,11 @@ mv RPMS/noarch/python-lenovolegionlinux-${TAG}-1.noarch.rpm ${BUILD_DIR}/
 #Move to repo
 cp ${BUILD_DIR}/dkms-lenovolegionlinux-${TAG}-0.x86_64.rpm ${REPODIR}/fedora/packages
 cp ${BUILD_DIR}/python-lenovolegionlinux-${TAG}-1.noarch.rpm ${REPODIR}/fedora/packages
+
+#create repo file
+echo "[LLL-pkg-repo]
+name=LLL-pkg-repo
+baseurl=https://mrduartept.github.io/LLL-pkg-repo/fedora/packages
+enabled=1
+gpgcheck=1
+gpgkey=https://mrduartept.github.io/LLL-pkg-repo/fedora/pgp-key.public" > ${REPODIR}/fedora/LLL.repo
