@@ -21,34 +21,35 @@ on:
 jobs:
   build-rpms:
     runs-on: ubuntu-latest
+    container:
+      image: fedora:rawhide
     steps:
-    - name: Checkout
-      uses: actions/checkout@v3
-
     - name: Clone & Update submodules
       run: |
+        dnf install git -y
+        git clone https://github.com/MrDuartePT/LLL-pkg-repo.git
+        cd LLL-pkg-repo
         git submodule update --init
         git pull --recurse-submodules
         git submodule update --remote --recursive
       shell: bash
 
-    - name: Install Dependencies
-      run: ./subprojects/LenovoLegionLinux/deploy/dependencies/install_dependencies_ubuntu.sh
-      shell: bash
-
-    - name: Install Fedora Distrobox & Dependencies
+    - name: Install dependencies
       run: |
-        wget -qO- https://raw.githubusercontent.com/89luca89/distrobox/main/install | sudo sh
-        distrobox create --image fedora --name fedora -Y
-        distrobox enter fedora -- bash -c ./subprojects/LenovoLegionLinux/deploy/dependencies/install_dependencies_fedora.sh
+        sudo dnf install -y kernel-headers kernel-devel dmidecode lm_sensors PyQt5 python3-yaml python3-pip python3-argcomplete polkit gpg
+        sudo dnf install -y dkms openssl mokutil
       shell: bash
 
     - name: Build rpm darkdetect
-      run: distrobox enter fedora -- bash -c subprojects/build_rpm_darkdetect.sh
+      run: |
+        cd LLL-pkg-repo
+        subprojects/build_rpm_darkdetect.sh
       shell: bash
 
-    - name: Build rpm darkdetect
-      run: distrobox enter fedora -- bash -c subprojects/build_rpm_LLL.sh
+    - name: Build rpm LenovoLegionLinux
+      run: |
+        cd LLL-pkg-repo
+        subprojects/build_rpm_LLL.sh
       shell: bash
 
     - name: Import GPG key
@@ -58,8 +59,8 @@ jobs:
 
     - name: Copy and Generate files - Fedora
       run: |
-        sudo apt-get install createrepo-c
-        cd fedora
+        sudo dnf install createrepo-c -y
+        cd LLL-pkg-repo/fedora
         gpg --armor --export "${{ secrets.GPG_ID }}" > ./pgp-key.public
         sudo rpm --import pgp-key.public
         echo "%_signature gpg
@@ -74,6 +75,7 @@ jobs:
 
     - name: Commit changes
       run: |
+        cd LLL-pkg-repo
         git fetch
         git add -A
         git config user.name github-actions

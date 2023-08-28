@@ -21,7 +21,6 @@ mkdir -p "${BUILD_DIR}"
 #Setup BUILD_DIR
 cp --recursive ${REPODIR}/subprojects/darkdetect ${BUILD_DIR}/python3-darkdetect-${TAG}
 cp --recursive ${REPODIR}/subprojects/{setup.cfg,setup.py,darkdetect.spec} ${BUILD_DIR}/python3-darkdetect-${TAG}
-sleep 10
 
 #Create rpm
 cd ${BUILD_DIR}
