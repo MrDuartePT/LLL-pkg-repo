@@ -92,14 +92,16 @@ pip install darkdetect[macos-listener]
 
 %build
 unset RPM_BUILD_ROOT
-%{__python3} setup.py bdist_wheel
+python3.11 setup.py bdist_wheel
 
 %install
 [ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
 mkdir %{buildroot}
 mkdir %{buildroot}/usr
 cd "%{_builddir}/%{name}-%{version}/dist"
-%{__python3} -m pip install --target /tmp/darkdetect_rpm/rpmbuild/BUILDROOT/usr/lib/python3.11/site-packages/ %{srcname}-%{version}-py3-none-any.whl
+python3.11 -m pip install --target %{buildroot}/usr/lib/python3.11/site-packages/ %{srcname}-%{version}-py3-none-any.whl
+
+ls /tmp/darkdetect_rpm/rpmbuild/BUILDROOT/python3-darkdetect-0.8.0-1.x86_64/usr/lib/python3.11/site-packages/darkdetect/__pycache__/
 
 %files -n python3-%{srcname}
 /usr/lib/python3.11/site-packages/darkdetect/__init__.py
@@ -108,16 +110,10 @@ cd "%{_builddir}/%{name}-%{version}/dist"
 /usr/lib/python3.11/site-packages/darkdetect/_linux_detect.py
 /usr/lib/python3.11/site-packages/darkdetect/_mac_detect.py
 /usr/lib/python3.11/site-packages/darkdetect/_windows_detect.py
-/usr/lib/python3.11/site-packages/darkdetect/__pycache__/__init__.cpython-311.opt-1.pyc
-/usr/lib/python3.11/site-packages/darkdetect/__pycache__/_linux_detect.cpython-311.opt-1.pyc
 /usr/lib/python3.11/site-packages/darkdetect/__pycache__/_linux_detect.cpython-311.pyc
 /usr/lib/python3.11/site-packages/darkdetect/__pycache__/__init__.cpython-311.pyc
-/usr/lib/python3.11/site-packages/darkdetect/__pycache__/__main__.cpython-311.opt-1.pyc
-/usr/lib/python3.11/site-packages/darkdetect/__pycache__/_mac_detect.cpython-311.opt-1.pyc
 /usr/lib/python3.11/site-packages/darkdetect/__pycache__/__main__.cpython-311.pyc
 /usr/lib/python3.11/site-packages/darkdetect/__pycache__/_mac_detect.cpython-311.pyc
-/usr/lib/python3.11/site-packages/darkdetect/__pycache__/_dummy.cpython-311.opt-1.pyc
-/usr/lib/python3.11/site-packages/darkdetect/__pycache__/_windows_detect.cpython-311.opt-1.pyc
 /usr/lib/python3.11/site-packages/darkdetect/__pycache__/_dummy.cpython-311.pyc
 /usr/lib/python3.11/site-packages/darkdetect/__pycache__/_windows_detect.cpython-311.pyc
 /usr/lib/python3.11/site-packages/darkdetect-%{version}.dist-info/INSTALLER
