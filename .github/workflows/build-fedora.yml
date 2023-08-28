@@ -61,8 +61,7 @@ jobs:
         rpm --addsign ./packages/*.rpm
         cd packages
         rm repodata/* || true
-        createrepo_c .
-        gpg --batch --detach-sign --armor repodata/repomd.xml
+        rm ./LLL.repo || true
 
         echo "[LLL-pkg-repo]
         name=LLL-pkg-repo
@@ -70,6 +69,10 @@ jobs:
         enabled=1
         gpgcheck=1
         gpgkey=https://mrduartept.github.io/LLL-pkg-repo/fedora/pgp-key.public" > ./LLL.repo
+
+        createrepo_c .
+        gpg --batch --detach-sign --armor repodata/repomd.xml
+
       shell: bash
 
     - name: Commit changes

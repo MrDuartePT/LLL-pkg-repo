@@ -69,7 +69,7 @@ jobs:
         git add -A
         git config user.name github-actions
         git config user.email github-actions@github.com
-        git commit -m "Add new rpms"
+        git commit -m "Add new debs"
         git pull --rebase
         git push
       shell: bash
