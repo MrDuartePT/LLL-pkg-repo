@@ -6,8 +6,7 @@ BUILD_DIR=/tmp/darkdetect_rpm
 set -ex
 
 #Intsall fedora packages
-sudo apt-get install dkms python3.11 python3.11-dev sed rpm createrepo-c
-sudo python3.11 -m pip install --upgrade setuptools wheel installer
+sudo dnf install rpmdevtools rpm dkms python-devel python-setuptools python-wheel python-installer sed rpm createrepo_c -y
 
 #GET TAG
 cd subprojects/darkdetect
