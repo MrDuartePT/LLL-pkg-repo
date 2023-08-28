@@ -3,6 +3,7 @@
 %define version _VERSION
 %define unmangled_version _VERSION
 %define release 1
+%define python3_sitelib /usr/lib/python3.11/site-packages/
 
 Summary: Detect OS Dark Mode from Python
 Name: %{name}
