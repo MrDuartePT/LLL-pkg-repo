@@ -98,10 +98,16 @@ python3.11 setup.py bdist_wheel
 [ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
 mkdir %{buildroot}
 mkdir %{buildroot}/usr
-cd "%{_builddir}/%{name}-%{version}/dist"
-python3.11 -m pip install --target %{buildroot}/usr/lib/python3.11/site-packages/ %{srcname}-%{version}-py3-none-any.whl
+cd "%{_builddir}/%{name}-%{version}"
+python3.11 -m installer --destdir="%{buildroot}" dist/*.whl
 
-ls /tmp/darkdetect_rpm/rpmbuild/BUILDROOT/python3-darkdetect-0.8.0-1.x86_64/usr/lib/python3.11/site-packages/darkdetect/__pycache__/
+ls %{buildroot}
+ls %{buildroot}/usr/
+ls %{buildroot}/usr/lib
+ls %{buildroot}/usr/lib/python3.11/
+ls %{buildroot}/usr/lib/python3.11/site-packages/
+ls %{buildroot}/usr/lib/python3.11/site-packages/darkdetect
+ls %{buildroot}/usr/lib/python3.11/site-packages/darkdetect-%{version}.dist-info
 
 %files -n python3-%{srcname}
 /usr/lib/python3.11/site-packages/darkdetect/__init__.py
@@ -116,11 +122,14 @@ ls /tmp/darkdetect_rpm/rpmbuild/BUILDROOT/python3-darkdetect-0.8.0-1.x86_64/usr/
 /usr/lib/python3.11/site-packages/darkdetect/__pycache__/_mac_detect.cpython-311.pyc
 /usr/lib/python3.11/site-packages/darkdetect/__pycache__/_dummy.cpython-311.pyc
 /usr/lib/python3.11/site-packages/darkdetect/__pycache__/_windows_detect.cpython-311.pyc
-/usr/lib/python3.11/site-packages/darkdetect-%{version}.dist-info/INSTALLER
+/usr/lib/python3.11/site-packages/darkdetect/__pycache__/__init__.cpython-311.opt-1.pyc
+/usr/lib/python3.11/site-packages/darkdetect/__pycache__/__main__.cpython-311.opt-1.pyc
+/usr/lib/python3.11/site-packages/darkdetect/__pycache__/_dummy.cpython-311.opt-1.pyc
+/usr/lib/python3.11/site-packages/darkdetect/__pycache__/_linux_detect.cpython-311.opt-1.pyc
+/usr/lib/python3.11/site-packages/darkdetect/__pycache__/_mac_detect.cpython-311.opt-1.pyc
+/usr/lib/python3.11/site-packages/darkdetect/__pycache__/_windows_detect.cpython-311.opt-1.pyc
 /usr/lib/python3.11/site-packages/darkdetect-%{version}.dist-info/LICENSE
 /usr/lib/python3.11/site-packages/darkdetect-%{version}.dist-info/METADATA
 /usr/lib/python3.11/site-packages/darkdetect-%{version}.dist-info/RECORD
-/usr/lib/python3.11/site-packages/darkdetect-%{version}.dist-info/REQUESTED
 /usr/lib/python3.11/site-packages/darkdetect-%{version}.dist-info/WHEEL
-/usr/lib/python3.11/site-packages/darkdetect-%{version}.dist-info/direct_url.json
 /usr/lib/python3.11/site-packages/darkdetect-%{version}.dist-info/top_level.txt

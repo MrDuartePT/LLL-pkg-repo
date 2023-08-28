@@ -53,8 +53,8 @@ mv python3-lenovolegionlinux-${TAG}.tar.gz rpmbuild/SOURCES
 cd rpmbuild
 
 #Use distrobox to build rpm on fedora
-rpmbuild --define "_topdir `pwd`" -bs SPECS/lenovolegionlinux.spec
-rpmbuild --nodeps --define "_topdir `pwd`" --rebuild SRPMS/python3-lenovolegionlinux-${TAG}-1.src.rpm
+doas rpmbuild --define "_topdir `pwd`" -bs SPECS/lenovolegionlinux.spec
+doas rpmbuild --nodeps --define "_topdir `pwd`" --rebuild SRPMS/python3-lenovolegionlinux-${TAG}-1.src.rpm
 mv RPMS/noarch/python3-lenovolegionlinux-${TAG}-1.noarch.rpm ${BUILD_DIR}/
 
 #Move to repo

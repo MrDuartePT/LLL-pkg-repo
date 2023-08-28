@@ -7,7 +7,7 @@ set -ex
 
 #Intsall fedora packages
 sudo apt-get install dkms python3.11 python3.11-dev sed rpm createrepo-c
-sudo pip install --upgrade wheel setuptools
+sudo python3.11 -m pip install --upgrade setuptools wheel installer
 
 #GET TAG
 cd subprojects/darkdetect
@@ -37,8 +37,8 @@ mv python3-darkdetect-${TAG}.tar.gz rpmbuild/SOURCES
 cd rpmbuild
 
 #Use distrobox to build rpm on fedora
-rpmbuild --define "_topdir `pwd`" -bs SPECS/darkdetect.spec
-rpmbuild --nodeps --define "_topdir `pwd`" --rebuild SRPMS/python3-darkdetect-${TAG}-1.src.rpm
+sudo rpmbuild --define "_topdir `pwd`" -bs SPECS/darkdetect.spec
+sudo rpmbuild --nodeps --define "_topdir `pwd`" --rebuild SRPMS/python3-darkdetect-${TAG}-1.src.rpm
 mv RPMS/noarch/python3-darkdetect-${TAG}-1.noarch.rpm ${BUILD_DIR}/
 
 #Move to repo
