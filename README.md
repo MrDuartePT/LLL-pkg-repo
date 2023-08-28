@@ -1,4 +1,5 @@
-![build workflow](https://github.com/MrDuartePT/LLL-pkg-repo/actions/workflows/build.yml/badge.svg)
+![build ubuntu workflow](https://github.com/MrDuartePT/LLL-pkg-repo/actions/workflows/build-ubuntu.yml/badge.svg)
+![build fedora workflow](https://github.com/MrDuartePT/LLL-pkg-repo/actions/workflows/build-fedora.yml/badge.svg)
 
 # LenovoLegionLinux package for Ubuntu and Fedora
 A PPA repository for my packages:

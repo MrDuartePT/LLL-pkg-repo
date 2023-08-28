@@ -90,10 +90,10 @@ pip install darkdetect[macos-listener]
 %setup -n %{name}-%{unmangled_version} -n %{name}-%{unmangled_version}
 
 %build
-py3_build
+python3 setup.py build
 
 %install
-py3_install
+python3 setup.py install --single-version-externally-managed -O1 --root=$RPM_BUILD_ROOT --record=INSTALLED_FILES
 
 %clean
 rm -rf $RPM_BUILD_ROOT

@@ -1,0 +1,74 @@
+name: Build Ubuntu
+run-name: ${{ github.actor }} running Build
+on: 
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: 'Log level'
+        required: true
+        default: 'warning'
+        type: choice
+        options:
+        - info
+        - warning
+        - debug
+  push:
+    branches:
+      - "*"
+  schedule:
+    # Runs at midnight UTC every day (see https://crontab.guru)
+    - cron: '0 0 * * *'
+jobs:
+  build-debs:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Clone & Update submodules
+      run: |
+        git submodule update --init
+        git pull --recurse-submodules
+        git submodule update --remote --recursive
+      shell: bash
+
+    - name: Install Dependencies
+      run: ./subprojects/LenovoLegionLinux/deploy/dependencies/install_dependencies_ubuntu.sh
+      shell: bash
+
+    - name: Build deb darkdetect
+      run: ./subprojects/build_deb_darkdetect.sh
+      shell: bash
+
+    - name: Build pkgs LenovoLegionLinux
+      run: |
+        sudo apt-get install /tmp/darkdetect_deb/python3-darkdetect_0.8.0-1_all.deb
+        ./subprojects/build_deb_LLL.sh
+      shell: bash
+
+    - name: Import GPG key
+      uses: crazy-max/ghaction-import-gpg@v5
+      with:
+        gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
+
+    - name: Copy and Generate files - Ubuntu
+      run: |
+        cd ubuntu
+        gpg --armor --export "${{ secrets.GPG_ID }}" > ./KEY.gpg
+        dpkg-scanpackages --multiversion . > Packages
+        gzip -k -f Packages
+        apt-ftparchive release . > Release
+        gpg --default-key "${{ secrets.GPG_ID }}" -abs -o - Release > Release.gpg
+        gpg --default-key "${{ secrets.GPG_ID }}" --clearsign -o - Release > InRelease
+        echo "deb [signed-by=/usr/share/keyrings/lll-ppa.gpg] https://${{ github.repository_owner }}.github.io/LLL-pkg-repo/ubuntu ./" > lll-ppa.list
+      shell: bash
+
+    - name: Commit changes
+      run: |
+        git fetch
+        git config user.name github-actions
+        git config user.email github-actions@github.com
+        git add -A
+        git commit -m "Add new deb"
+        git push
+      shell: bash

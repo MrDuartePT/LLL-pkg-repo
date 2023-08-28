@@ -1,4 +1,4 @@
-name: Build
+name: Build Fedora
 run-name: ${{ github.actor }} running Build
 on: 
   workflow_dispatch:
@@ -19,7 +19,7 @@ on:
     # Runs at midnight UTC every day (see https://crontab.guru)
     - cron: '0 0 * * *'
 jobs:
-  build-release-debs-rpms:
+  build-rpms:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
@@ -37,13 +37,12 @@ jobs:
       shell: bash
 
     - name: Build pkgs darkdetect
-      run: ./subprojects/build_deb_rpm_darkdetect.sh
+      run: ./subprojects/build_rpm_darkdetect.sh
       shell: bash
 
     - name: Build pkgs LenovoLegionLinux
       run: |
-        sudo apt-get install /tmp/darkdetect_pkg/python3-darkdetect_0.8.0-1_all.deb
-        ./subprojects/build_deb_rpm_LLL.sh
+        ./subprojects/build_rpm_LLL.sh
       shell: bash
 
     - name: Import GPG key
@@ -54,8 +53,6 @@ jobs:
     - name: Copy and Generate files - Ubuntu
       run: |
         cd ubuntu
-        cp /tmp/pkg/lenovolegionlinux-dkms_1.0.0_amd64.deb  ./    
-        cp /tmp/pkg/python3-legion-linux_1.0.0-1_all.deb ./
         gpg --armor --export "${{ secrets.GPG_ID }}" > ./KEY.gpg
         dpkg-scanpackages --multiversion . > Packages
         gzip -k -f Packages
