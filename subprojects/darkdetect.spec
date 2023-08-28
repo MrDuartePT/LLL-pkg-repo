@@ -99,13 +99,7 @@ unset RPM_BUILD_ROOT
 mkdir %{buildroot}
 mkdir %{buildroot}/usr
 cd "%{_builddir}/%{name}-%{version}/dist"
-%{__python3} -m pip install --target %{buildroot}%{python3_sitelib} %{srcname}-%{version}-py3-none-any.whl
-
-ls /tmp/darkdetect_rpm/rpmbuild/BUILDROOT/
-ls /tmp/darkdetect_rpm/rpmbuild/BUILDROOT/python3-darkdetect-0.8.0-1.x86_64
-ls /tmp/darkdetect_rpm/rpmbuild/BUILDROOT/python3-darkdetect-0.8.0-1.x86_64/usr/lib
-ls /tmp/darkdetect_rpm/rpmbuild/BUILDROOT/python3-darkdetect-0.8.0-1.x86_64/usr/lib/python3.11/site-packages/
-ls /tmp/darkdetect_rpm/rpmbuild/BUILDROOT/python3-darkdetect-0.8.0-1.x86_64/usr/lib/python3.11/site-packages/darkdetect/
+%{__python3} -m pip install --target /tmp/darkdetect_rpm/rpmbuild/BUILDROOT/usr/lib/python3.11/site-packages/ %{srcname}-%{version}-py3-none-any.whl
 
 %files -n python3-%{srcname}
 /usr/lib/python3.11/site-packages/darkdetect/__init__.py
