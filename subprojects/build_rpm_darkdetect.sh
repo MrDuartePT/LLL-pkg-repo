@@ -4,9 +4,10 @@ REPODIR="${DIR}/.."
 BUILD_DIR=/tmp/darkdetect_rpm
 
 set -ex
-#Intsall debian packages
-#sudo apt-get install debhelper dkms python3-all python3-stdeb dh-python sed
-#sudo pip install --upgrade setuptools build installer #Force recent version of setuptools on github ci (ubuntu)
+
+#Intsall fedora packages
+./subprojects/LenovoLegionLinux/deploy/dependencies/install_dependencies_fedora.sh
+sudo dnf install dkms python python-setuptools python-wheel sed curl rpmlint rpm createrepo_c rpmdevtools git -y
 
 #GET TAG
 cd subprojects/darkdetect
@@ -21,6 +22,7 @@ mkdir -p "${BUILD_DIR}"
 #Setup BUILD_DIR
 cp --recursive ${REPODIR}/subprojects/darkdetect ${BUILD_DIR}/python3-darkdetect-${TAG}
 cp --recursive ${REPODIR}/subprojects/{setup.cfg,setup.py,darkdetect.spec} ${BUILD_DIR}/python3-darkdetect-${TAG}
+sleep 10
 
 #Create rpm
 cd ${BUILD_DIR}
@@ -34,6 +36,8 @@ sed -i "s/%define unmangled_version _VERSION/%define unmangled_version ${TAG}/g"
 tar --create --file python3-darkdetect-${TAG}.tar.gz python3-darkdetect-${TAG} && rm --recursive python3-darkdetect-${TAG}
 mv python3-darkdetect-${TAG}.tar.gz rpmbuild/SOURCES
 cd rpmbuild
+
+#Use distrobox to build rpm on fedora
 rpmbuild --define "_topdir `pwd`" -bs SPECS/darkdetect.spec
 rpmbuild --nodeps --define "_topdir `pwd`" --rebuild SRPMS/python3-darkdetect-${TAG}-1.src.rpm
 mv RPMS/noarch/python3-darkdetect-${TAG}-1.noarch.rpm ${BUILD_DIR}/

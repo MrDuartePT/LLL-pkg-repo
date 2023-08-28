@@ -3,7 +3,6 @@
 %define version _VERSION
 %define unmangled_version _VERSION
 %define release 1
-%define python3_sitelib /usr/lib/python3.11/site-packages/
 
 Summary: Detect OS Dark Mode from Python
 Name: %{name}
@@ -93,14 +92,14 @@ pip install darkdetect[macos-listener]
 
 %build
 unset RPM_BUILD_ROOT
-python3 setup.py bdist_wheel
+%{__python3} setup.py bdist_wheel
 
 %install
 [ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
 mkdir %{buildroot}
 mkdir %{buildroot}/usr
 cd "%{_builddir}/%{name}-%{version}/dist"
-python3 -m pip install --target %{buildroot}%{python3_sitelib} %{srcname}-%{version}-py3-none-any.whl 
+%{__python3} -m pip install --target %{buildroot}%{python3_sitelib} %{srcname}-%{version}-py3-none-any.whl 
 
 %files -n python3-%{srcname}
 %{python3_sitelib}/darkdetect/__init__.py

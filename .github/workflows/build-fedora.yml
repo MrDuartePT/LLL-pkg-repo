@@ -36,13 +36,8 @@ jobs:
       run: ./subprojects/LenovoLegionLinux/deploy/dependencies/install_dependencies_ubuntu.sh
       shell: bash
 
-    - name: Build rpm darkdetect
-      run: ./subprojects/build_rpm_darkdetect.sh
-      shell: bash
-
-    - name: Build rpm LenovoLegionLinux
-      run: |
-        ./subprojects/build_rpm_LLL.sh
+    - name: Build rpm darkdetect && LenovoLegionLinux
+      run: ./subprojects/build_rpm_fedora.sh
       shell: bash
 
     - name: Import GPG key
