@@ -40,26 +40,26 @@ mv RPMS/x86_64/dkms-lenovolegionlinux-${TAG}-0.x86_64.rpm ${BUILD_DIR}/
 #Build PYTHON RPM
 cd ${BUILD_DIR}
 mkdir -p rpmbuild/{BUILD,BUILDROOT,RPMS,SOURCES,SPECS,SRPMS}
-cp -r ${REPODIR_LLL}/python/legion_linux python-lenovolegionlinux-${TAG}
-mv python-lenovolegionlinux-${TAG}/lenovolegionlinux.spec rpmbuild/SPECS
+cp -r ${REPODIR_LLL}/python/legion_linux python3-lenovolegionlinux-${TAG}
+mv python3-lenovolegionlinux-${TAG}/lenovolegionlinux.spec rpmbuild/SPECS
 #Change version according to tag
-sed -i "s/version = _VERSION/version = ${TAG}/g" python-lenovolegionlinux-${TAG}/setup.cfg
+sed -i "s/version = _VERSION/version = ${TAG}/g" python3-lenovolegionlinux-${TAG}/setup.cfg
 sed -i "s/%define version _VERSION/%define version ${TAG}/g" rpmbuild/SPECS/lenovolegionlinux.spec
 sed -i "s/%define unmangled_version _VERSION/%define unmangled_version ${TAG}/g" rpmbuild/SPECS/lenovolegionlinux.spec
 #
-rm -r python-lenovolegionlinux-${TAG}/legion_linux/extra && cp -r ${REPODIR_LLL}/extra python-lenovolegionlinux-${TAG}/legion_linux/extra
-tar --create --file python-lenovolegionlinux-${TAG}.tar.gz python-lenovolegionlinux-${TAG} && rm --recursive python-lenovolegionlinux-${TAG}
-mv python-lenovolegionlinux-${TAG}.tar.gz rpmbuild/SOURCES
+rm -r python3-lenovolegionlinux-${TAG}/legion_linux/extra && cp -r ${REPODIR_LLL}/extra python3-lenovolegionlinux-${TAG}/legion_linux/extra
+tar --create --file python3-lenovolegionlinux-${TAG}.tar.gz python3-lenovolegionlinux-${TAG} && rm --recursive python3-lenovolegionlinux-${TAG}
+mv python3-lenovolegionlinux-${TAG}.tar.gz rpmbuild/SOURCES
 cd rpmbuild
 
 #Use distrobox to build rpm on fedora
 rpmbuild --define "_topdir `pwd`" -bs SPECS/lenovolegionlinux.spec
-rpmbuild --nodeps --define "_topdir `pwd`" --rebuild SRPMS/python-lenovolegionlinux-${TAG}-1.src.rpm
-mv RPMS/noarch/python-lenovolegionlinux-${TAG}-1.noarch.rpm ${BUILD_DIR}/
+rpmbuild --nodeps --define "_topdir `pwd`" --rebuild SRPMS/python3-lenovolegionlinux-${TAG}-1.src.rpm
+mv RPMS/noarch/python3-lenovolegionlinux-${TAG}-1.noarch.rpm ${BUILD_DIR}/
 
 #Move to repo
 cp ${BUILD_DIR}/dkms-lenovolegionlinux-${TAG}-0.x86_64.rpm ${REPODIR}/fedora/packages
-cp ${BUILD_DIR}/python-lenovolegionlinux-${TAG}-1.noarch.rpm ${REPODIR}/fedora/packages
+cp ${BUILD_DIR}/python3-lenovolegionlinux-${TAG}-1.noarch.rpm ${REPODIR}/fedora/packages
 
 #create repo file
 echo "[LLL-pkg-repo]
