@@ -92,14 +92,14 @@ pip install darkdetect[macos-listener]
 
 %build
 unset RPM_BUILD_ROOT
-%{__python3} setup.py bdist_wheel
+python3 setup.py bdist_wheel
 
 %install
 [ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
 mkdir %{buildroot}
 mkdir %{buildroot}/usr
 cd "%{_builddir}/%{name}-%{version}/dist"
-%{__python3} -m pip install --target %{buildroot}%{python3_sitelib} %{srcname}-%{version}-py3-none-any.whl 
+python3 -m pip install --target %{buildroot}%{python3_sitelib} %{srcname}-%{version}-py3-none-any.whl 
 
 %files -n python3-%{srcname}
 %{python3_sitelib}/darkdetect/__init__.py
