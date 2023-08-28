@@ -1,3 +1,4 @@
+%global srcname darkdetect
 %define name python3-darkdetect
 %define version _VERSION
 %define unmangled_version _VERSION
@@ -84,16 +85,46 @@ pip install darkdetect[macos-listener]
 
 
 %prep
-%setup -n %{name}-%{unmangled_version} -n %{name}-%{unmangled_version}
+%autosetup -n %{name}-%{unmangled_version} -n %{name}-%{unmangled_version}
 
 %build
-python3 setup.py build
+unset RPM_BUILD_ROOT
+%{__python3} setup.py bdist_wheel
 
 %install
-python3 setup.py install --single-version-externally-managed -O1 --root=$RPM_BUILD_ROOT --record=INSTALLED_FILES
+[ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
+mkdir %{buildroot}
+mkdir %{buildroot}/usr
+cd "%{_builddir}/%{srcname}-%{version}/dist"
+%{__python3} -m pip install --target %{buildroot}%{python3_sitelib} %{srcname}-%{version}-py3-none-any.whl 
 
-%clean
-rm -rf $RPM_BUILD_ROOT
-
-%files -f INSTALLED_FILES
-%defattr(-,root,root)
+%files -n python3-%{srcname}
+%{python3_sitelib}/darkdetect/__init__.py
+%{python3_sitelib}/darkdetect/__init__.py
+%{python3_sitelib}/darkdetect/__main__.py
+%{python3_sitelib}/darkdetect/_dummy.py
+%{python3_sitelib}/darkdetect/_linux_detect.py
+%{python3_sitelib}/darkdetect/_mac_detect.py
+%{python3_sitelib}/darkdetect/_windows_detect.py
+%{python3_sitelib}/darkdetect/__pycache__/__init__.cpython-311.opt-1.pyc
+%{python3_sitelib}/darkdetect/__pycache__/_linux_detect.cpython-311.opt-1.pyc
+%{python3_sitelib}/darkdetect/__pycache__/_linux_detect.cpython-311.opt-2.pyc
+%{python3_sitelib}/darkdetect/__pycache__/__init__.cpython-311.opt-2.pyc
+%{python3_sitelib}/darkdetect/__pycache__/_linux_detect.cpython-311.pyc
+%{python3_sitelib}/darkdetect/__pycache__/__init__.cpython-311.pyc
+%{python3_sitelib}/darkdetect/__pycache__/__main__.cpython-311.opt-1.pyc
+%{python3_sitelib}/darkdetect/__pycache__/_mac_detect.cpython-311.opt-1.pyc
+%{python3_sitelib}/darkdetect/__pycache__/__main__.cpython-311.opt-2.pyc
+%{python3_sitelib}/darkdetect/__pycache__/_mac_detect.cpython-311.opt-2.pyc
+%{python3_sitelib}/darkdetect/__pycache__/__main__.cpython-311.pyc
+%{python3_sitelib}/darkdetect/__pycache__/_mac_detect.cpython-311.pyc
+%{python3_sitelib}/darkdetect/__pycache__/_dummy.cpython-311.opt-1.pyc
+%{python3_sitelib}/darkdetect/__pycache__/_windows_detect.cpython-311.opt-1.pyc
+%{python3_sitelib}/darkdetect/__pycache__/_dummy.cpython-311.opt-2.pyc
+%{python3_sitelib}/darkdetect/__pycache__/_windows_detect.cpython-311.opt-2.pyc
+%{python3_sitelib}/darkdetect/__pycache__/_dummy.cpython-311.pyc
+%{python3_sitelib}/darkdetect/__pycache__/_windows_detect.cpython-311.pyc
+%{python3_sitelib}/darkdetect-%{_version}.dist-info/METADATA
+%{python3_sitelib}/darkdetect-%{_version}.dist-info/RECORD
+%{python3_sitelib}/darkdetect-%{_version}.dist-info/WHEEL
+%{python3_sitelib}/darkdetect-%{_version}.dist-info/top_level.txt
