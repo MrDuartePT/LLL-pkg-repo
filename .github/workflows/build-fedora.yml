@@ -21,7 +21,16 @@ on:
 jobs:
   build-rpms:
     runs-on: ubuntu-latest
+    container:
+      image: fedora:rawhide
     steps:
+
+    - name: Install Dependencies
+      run: | 
+        ./subprojects/LenovoLegionLinux/deploy/dependencies/install_dependencies_fedora.sh
+        sudo dnf install git -y
+      shell: bash
+
     - name: Checkout
       uses: actions/checkout@v3
 
@@ -32,12 +41,12 @@ jobs:
         git submodule update --remote --recursive
       shell: bash
 
-    - name: Install Dependencies
-      run: ./subprojects/LenovoLegionLinux/deploy/dependencies/install_dependencies_ubuntu.sh
+    - name: Build rpm darkdetect
+      run: ./subprojects/build_rpm_darkdetect.sh
       shell: bash
 
-    - name: Build rpm darkdetect && LenovoLegionLinux
-      run: ./subprojects/build_rpm_fedora.sh
+    - name: Build rpm darkdetect
+      run: ./subprojects/build_rpm_LLL.sh
       shell: bash
 
     - name: Import GPG key

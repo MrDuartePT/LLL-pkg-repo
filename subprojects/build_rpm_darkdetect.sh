@@ -6,7 +6,6 @@ BUILD_DIR=/tmp/darkdetect_rpm
 set -ex
 
 #Intsall fedora packages
-./subprojects/LenovoLegionLinux/deploy/dependencies/install_dependencies_fedora.sh
 sudo dnf install dkms python python-setuptools python-wheel sed curl rpmlint rpm createrepo_c rpmdevtools git -y
 
 #GET TAG

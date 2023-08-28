@@ -38,7 +38,6 @@ rpmbuild --nodeps --define "_topdir `pwd`" --rebuild SRPMS/dkms-lenovolegionlinu
 mv RPMS/x86_64/dkms-lenovolegionlinux-${TAG}-0.x86_64.rpm ${BUILD_DIR}/
 
 #Build PYTHON RPM
-distrobox enter fedora
 cd ${BUILD_DIR}
 mkdir -p rpmbuild/{BUILD,BUILDROOT,RPMS,SOURCES,SPECS,SRPMS}
 cp -r ${REPODIR_LLL}/python/legion_linux python-lenovolegionlinux-${TAG}
