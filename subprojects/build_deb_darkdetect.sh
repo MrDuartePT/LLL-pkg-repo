@@ -17,7 +17,7 @@ cd ${REPODIR}
 rm -rf "${BUILD_DIR}" || true
 mkdir -p "${BUILD_DIR}"
 
-## BUILD DKMS DEB
+## BUILD PYTHON DEB
 #Setup BUILD_DIR
 cp --recursive ${REPODIR}/subprojects/darkdetect ${BUILD_DIR}/darkdetect
 cp --recursive ${REPODIR}/subprojects/{setup.cfg,setup.py,darkdetect.spec} ${BUILD_DIR}/darkdetect
@@ -36,5 +36,4 @@ sudo dpkg-buildpackage -uc -us
 cp ../python3-darkdetect_${TAG}-1_all.deb ${BUILD_DIR}
 
 #Move to repo
-cd ${REPODIR}/ubuntu
-cp ${BUILD_DIR}/python3-darkdetect_${TAG}-1_all.deb ./packages
+cp ${BUILD_DIR}/python3-darkdetect_${TAG}-1_all.deb ${REPODIR}/ubuntu

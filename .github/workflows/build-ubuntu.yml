@@ -1,4 +1,4 @@
-name: Build Ubuntu
+name: Ubuntu
 run-name: ${{ github.actor }} running Build
 on: 
   workflow_dispatch:
@@ -66,9 +66,10 @@ jobs:
     - name: Commit changes
       run: |
         git fetch
+        git pull --rebase
         git config user.name github-actions
         git config user.email github-actions@github.com
         git add -A
-        git commit -m "Add new deb"
+        git commit -m "Add new debs"
         git push
       shell: bash

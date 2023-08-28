@@ -17,23 +17,17 @@ cd ${REPODIR}
 rm -rf "${BUILD_DIR}" || true
 mkdir -p "${BUILD_DIR}"
 
-## BUILD DKMS DEB
+## BUILD PYTHON RPM
 #Setup BUILD_DIR
 cp --recursive ${REPODIR}/subprojects/darkdetect ${BUILD_DIR}/python3-darkdetect-${TAG}
 cp --recursive ${REPODIR}/subprojects/{setup.cfg,setup.py,darkdetect.spec} ${BUILD_DIR}/python3-darkdetect-${TAG}
-
-cd ${BUILD_DIR}/darkdetect
-
-# Create package sceleton
-#Change version according to tag
-sed -i "s/version = _VERSION/version = ${TAG}/g" setup.cfg
-#
 
 #Create rpm
 cd ${BUILD_DIR}
 mkdir -p rpmbuild/{BUILD,BUILDROOT,RPMS,SOURCES,SPECS,SRPMS}
 mv python3-darkdetect-${TAG}/darkdetect.spec rpmbuild/SPECS
 #Change version according to tag
+sed -i "s/version = _VERSION/version = ${TAG}/g" python3-darkdetect-${TAG}/setup.cfg
 sed -i "s/%define version _VERSION/%define version ${TAG}/g" rpmbuild/SPECS/darkdetect.spec
 sed -i "s/%define unmangled_version _VERSION/%define unmangled_version ${TAG}/g" rpmbuild/SPECS/darkdetect.spec
 #
@@ -45,5 +39,4 @@ rpmbuild --nodeps --define "_topdir `pwd`" --rebuild SRPMS/python3-darkdetect-${
 mv RPMS/noarch/python3-darkdetect-${TAG}-1.noarch.rpm ${BUILD_DIR}/
 
 #Move to repo
-cd ${REPODIR}/fedora
-cp ${BUILD_DIR}/python3-darkdetect-${TAG}-1.noarch.rpm ./packages
+cp ${BUILD_DIR}/python3-darkdetect-${TAG}-1.noarch.rpm ${REPODIR}/fedora/packages

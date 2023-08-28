@@ -1,4 +1,4 @@
-name: Build Fedora
+name: Fedora
 run-name: ${{ github.actor }} running Build
 on: 
   workflow_dispatch:
@@ -36,11 +36,11 @@ jobs:
       run: ./subprojects/LenovoLegionLinux/deploy/dependencies/install_dependencies_ubuntu.sh
       shell: bash
 
-    - name: Build pkgs darkdetect
+    - name: Build rpm darkdetect
       run: ./subprojects/build_rpm_darkdetect.sh
       shell: bash
 
-    - name: Build pkgs LenovoLegionLinux
+    - name: Build rpm LenovoLegionLinux
       run: |
         ./subprojects/build_rpm_LLL.sh
       shell: bash
@@ -50,26 +50,11 @@ jobs:
       with:
         gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
 
-    - name: Copy and Generate files - Ubuntu
-      run: |
-        cd ubuntu
-        gpg --armor --export "${{ secrets.GPG_ID }}" > ./KEY.gpg
-        dpkg-scanpackages --multiversion . > Packages
-        gzip -k -f Packages
-        apt-ftparchive release . > Release
-        gpg --default-key "${{ secrets.GPG_ID }}" -abs -o - Release > Release.gpg
-        gpg --default-key "${{ secrets.GPG_ID }}" --clearsign -o - Release > InRelease
-        echo "deb [signed-by=/usr/share/keyrings/lll-ppa.gpg] https://${{ github.repository_owner }}.github.io/LLL-pkg-repo/ubuntu ./" > lll-ppa.list
-      shell: bash
-
     - name: Copy and Generate files - Fedora
       run: |
         sudo apt-get install createrepo-c
         cd fedora
         gpg --armor --export "${{ secrets.GPG_ID }}" > ./pgp-key.public
-        cp /tmp/pkg/python-lenovolegionlinux-1.0.0-1.noarch.rpm  ./packages
-        cp /tmp/pkg/dkms-lenovolegionlinux-1.0.0-0.x86_64.rpm ./packages
-
         sudo rpm --import pgp-key.public
         echo "%_signature gpg
         %_gpg_name Package Manager" > ~/.rpmmacros
@@ -89,11 +74,11 @@ jobs:
 
     - name: Commit changes
       run: |
-        tag=${GITHUB_REF#refs/tags/}
         git fetch
+        git pull --rebase
         git config user.name github-actions
         git config user.email github-actions@github.com
         git add -A
-        git commit -m "Add new deb: $tag"
+        git commit -m "Add new rpms"
         git push
       shell: bash

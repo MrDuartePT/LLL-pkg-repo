@@ -37,12 +37,13 @@ cd rpmbuild && rpmbuild --define "_topdir `pwd`" -bs SPECS/lenovolegionlinux.spe
 rpmbuild --nodeps --define "_topdir `pwd`" --rebuild SRPMS/dkms-lenovolegionlinux-${TAG}-0.src.rpm
 mv RPMS/x86_64/dkms-lenovolegionlinux-${TAG}-0.x86_64.rpm ${BUILD_DIR}/
 
-#Build RPM PYTHON
+#Build PYTHON RPM
 cd ${BUILD_DIR}
 mkdir -p rpmbuild/{BUILD,BUILDROOT,RPMS,SOURCES,SPECS,SRPMS}
 cp -r ${REPODIR_LLL}/python/legion_linux python-lenovolegionlinux-${TAG}
 mv python-lenovolegionlinux-${TAG}/lenovolegionlinux.spec rpmbuild/SPECS
 #Change version according to tag
+sed -i "s/version = _VERSION/version = ${TAG}/g" python-lenovolegionlinux-${TAG}/setup.cfg
 sed -i "s/%define version _VERSION/%define version ${TAG}/g" rpmbuild/SPECS/lenovolegionlinux.spec
 sed -i "s/%define unmangled_version _VERSION/%define unmangled_version ${TAG}/g" rpmbuild/SPECS/lenovolegionlinux.spec
 #
@@ -55,6 +56,5 @@ rpmbuild --nodeps --define "_topdir `pwd`" --rebuild SRPMS/python-lenovolegionli
 mv RPMS/noarch/python-lenovolegionlinux-${TAG}-1.noarch.rpm ${BUILD_DIR}/
 
 #Move to repo
-cd ${REPODIR}/fedora
-cp ${BUILD_DIR}/dkms-lenovolegionlinux-${TAG}-0.x86_64.rpm
-cp ${BUILD_DIR}/python-lenovolegionlinux-${TAG}-1.noarch.rpm
+cp ${BUILD_DIR}/dkms-lenovolegionlinux-${TAG}-0.x86_64.rpm ${REPODIR}/fedora/packages
+cp ${BUILD_DIR}/python-lenovolegionlinux-${TAG}-1.noarch.rpm ${REPODIR}/fedora/packages
