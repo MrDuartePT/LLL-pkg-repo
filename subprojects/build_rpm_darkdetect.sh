@@ -5,8 +5,8 @@ BUILD_DIR=/tmp/darkdetect_rpm
 
 set -ex
 #Intsall debian packages
-sudo apt-get install debhelper dkms python3-all python3-stdeb dh-python sed
-sudo pip install --upgrade setuptools build installer #Force recent version of setuptools on github ci (ubuntu)
+#sudo apt-get install debhelper dkms python3-all python3-stdeb dh-python sed
+#sudo pip install --upgrade setuptools build installer #Force recent version of setuptools on github ci (ubuntu)
 
 #GET TAG
 cd subprojects/darkdetect

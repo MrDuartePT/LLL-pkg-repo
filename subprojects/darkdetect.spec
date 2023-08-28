@@ -18,6 +18,9 @@ Vendor: albertosottile <Alberto Sottile <asottile@gmail.com>>
 Packager: Gonçalo Negrier Duarte <gonegrier.duarte@gamil.com>
 Url: https://github.com/albertosottile/darkdetect
 
+BuildRequires:  python3-devel
+BuildRequires:  python3-wheel
+
 %description
 # Darkdetect
 
@@ -95,11 +98,10 @@ unset RPM_BUILD_ROOT
 [ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
 mkdir %{buildroot}
 mkdir %{buildroot}/usr
-cd "%{_builddir}/%{srcname}-%{version}/dist"
+cd "%{_builddir}/%{name}-%{version}/dist"
 %{__python3} -m pip install --target %{buildroot}%{python3_sitelib} %{srcname}-%{version}-py3-none-any.whl 
 
 %files -n python3-%{srcname}
-%{python3_sitelib}/darkdetect/__init__.py
 %{python3_sitelib}/darkdetect/__init__.py
 %{python3_sitelib}/darkdetect/__main__.py
 %{python3_sitelib}/darkdetect/_dummy.py
@@ -108,23 +110,21 @@ cd "%{_builddir}/%{srcname}-%{version}/dist"
 %{python3_sitelib}/darkdetect/_windows_detect.py
 %{python3_sitelib}/darkdetect/__pycache__/__init__.cpython-311.opt-1.pyc
 %{python3_sitelib}/darkdetect/__pycache__/_linux_detect.cpython-311.opt-1.pyc
-%{python3_sitelib}/darkdetect/__pycache__/_linux_detect.cpython-311.opt-2.pyc
-%{python3_sitelib}/darkdetect/__pycache__/__init__.cpython-311.opt-2.pyc
 %{python3_sitelib}/darkdetect/__pycache__/_linux_detect.cpython-311.pyc
 %{python3_sitelib}/darkdetect/__pycache__/__init__.cpython-311.pyc
 %{python3_sitelib}/darkdetect/__pycache__/__main__.cpython-311.opt-1.pyc
 %{python3_sitelib}/darkdetect/__pycache__/_mac_detect.cpython-311.opt-1.pyc
-%{python3_sitelib}/darkdetect/__pycache__/__main__.cpython-311.opt-2.pyc
-%{python3_sitelib}/darkdetect/__pycache__/_mac_detect.cpython-311.opt-2.pyc
 %{python3_sitelib}/darkdetect/__pycache__/__main__.cpython-311.pyc
 %{python3_sitelib}/darkdetect/__pycache__/_mac_detect.cpython-311.pyc
 %{python3_sitelib}/darkdetect/__pycache__/_dummy.cpython-311.opt-1.pyc
 %{python3_sitelib}/darkdetect/__pycache__/_windows_detect.cpython-311.opt-1.pyc
-%{python3_sitelib}/darkdetect/__pycache__/_dummy.cpython-311.opt-2.pyc
-%{python3_sitelib}/darkdetect/__pycache__/_windows_detect.cpython-311.opt-2.pyc
 %{python3_sitelib}/darkdetect/__pycache__/_dummy.cpython-311.pyc
 %{python3_sitelib}/darkdetect/__pycache__/_windows_detect.cpython-311.pyc
-%{python3_sitelib}/darkdetect-%{_version}.dist-info/METADATA
-%{python3_sitelib}/darkdetect-%{_version}.dist-info/RECORD
-%{python3_sitelib}/darkdetect-%{_version}.dist-info/WHEEL
-%{python3_sitelib}/darkdetect-%{_version}.dist-info/top_level.txt
+%{python3_sitelib}/darkdetect-%{version}.dist-info/INSTALLER
+%{python3_sitelib}/darkdetect-%{version}.dist-info/LICENSE
+%{python3_sitelib}/darkdetect-%{version}.dist-info/METADATA
+%{python3_sitelib}/darkdetect-%{version}.dist-info/RECORD
+%{python3_sitelib}/darkdetect-%{version}.dist-info/REQUESTED
+%{python3_sitelib}/darkdetect-%{version}.dist-info/WHEEL
+%{python3_sitelib}/darkdetect-%{version}.dist-info/direct_url.json
+%{python3_sitelib}/darkdetect-%{version}.dist-info/top_level.txt
