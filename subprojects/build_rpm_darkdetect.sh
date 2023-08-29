@@ -1,5 +1,5 @@
 #!/bin/bash
-DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
 REPODIR="${DIR}/.."
 BUILD_DIR=/tmp/darkdetect_rpm
 
@@ -10,7 +10,8 @@ sudo dnf install rpmdevtools rpm dkms python-devel python-setuptools python-whee
 
 #GET TAG
 cd subprojects/darkdetect
-TAG=$(git tag --points-at HEAD | cut -c 2-)
+TAG=$(git describe --tags --abbrev=0 | sed 's/[^0-9.]*//g')
+git checkout $(git describe --tags --abbrev=0) #checkout tag
 cd ${REPODIR}
 
 # recreate BUILD_DIR
@@ -36,8 +37,8 @@ mv python3-darkdetect-${TAG}.tar.gz rpmbuild/SOURCES
 cd rpmbuild
 
 #Use distrobox to build rpm on fedora
-sudo rpmbuild --define "_topdir `pwd`" -bs SPECS/darkdetect.spec
-sudo rpmbuild --define "_topdir `pwd`" --rebuild SRPMS/python3-darkdetect-${TAG}-1.src.rpm
+sudo rpmbuild --define "_topdir $(pwd)" -bs SPECS/darkdetect.spec
+sudo rpmbuild --define "_topdir $(pwd)" --rebuild SRPMS/python3-darkdetect-${TAG}-1.src.rpm
 mv RPMS/noarch/python3-darkdetect-${TAG}-1.noarch.rpm ${BUILD_DIR}/
 
 #Move to repo

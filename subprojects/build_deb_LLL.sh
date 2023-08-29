@@ -1,15 +1,15 @@
 #!/bin/bash
-DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
 REPODIR="${DIR}/.."
 REPODIR_LLL="${REPODIR}/subprojects/LenovoLegionLinux"
 BUILD_DIR=/tmp/deb
 set -ex
 
 #GET TAG (USE THIS WHEN STABLE RELEASE GET OUT)
-#cd ${REPODIR_LLL}
-#TAG=$(git tag --points-at HEAD | cut -c 2-)
-#cd ${REPODIR}
-TAG="1.0.0"
+cd ${REPODIR_LLL}
+TAG=$(git describe --tags --abbrev=0 | sed 's/[^0-9.]*//g')
+git checkout $(git describe --tags --abbrev=0) #checkout tag
+cd ${REPODIR}
 DKMSDIR=/usr/src/lenovolegionlinux-${TAG}
 
 # recreate BUILD_DIR for both deb
@@ -57,7 +57,7 @@ sudo cp -R ../../../../extra/service/legion-linux.service .
 sudo cp -R ../../../../extra/service/legion-linux.path .
 echo "legion-linux.service /etc/systemd/system/" | sudo tee -a debian/install
 echo "legion-linux.path /lib/systemd/system/" | sudo tee -a debian/install
-sudo  EDITOR=/bin/true dpkg-source -q --commit . p1
+sudo EDITOR=/bin/true dpkg-source -q --commit . p1
 
 # Build package
 sudo dpkg-buildpackage -uc -us
