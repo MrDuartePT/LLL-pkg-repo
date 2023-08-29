@@ -6,7 +6,7 @@ BUILD_DIR=/tmp/darkdetect_rpm
 set -ex
 
 #Intsall fedora packages
-sudo dnf install rpmdevtools rpm dkms python-devel python-setuptools python-wheel python-installer sed rpm createrepo_c -y
+sudo dnf install rpmdevtools rpm dkms python-devel python-setuptools python-wheel python-installer sed rpm createrepo_c python-pyyaml -y
 
 #GET TAG
 cd subprojects/darkdetect
@@ -37,7 +37,7 @@ cd rpmbuild
 
 #Use distrobox to build rpm on fedora
 sudo rpmbuild --define "_topdir `pwd`" -bs SPECS/darkdetect.spec
-sudo rpmbuild --nodeps --define "_topdir `pwd`" --rebuild SRPMS/python3-darkdetect-${TAG}-1.src.rpm
+sudo rpmbuild --define "_topdir `pwd`" --rebuild SRPMS/python3-darkdetect-${TAG}-1.src.rpm
 mv RPMS/noarch/python3-darkdetect-${TAG}-1.noarch.rpm ${BUILD_DIR}/
 
 #Move to repo

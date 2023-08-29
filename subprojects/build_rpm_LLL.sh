@@ -34,7 +34,7 @@ sed -i "s/Version:      _VERSION/Version:      $TAG/g" rpmbuild/SPECS/lenovolegi
 tar --create --file lenovolegionlinux-kmod-${TAG}-x86_64.tar.gz lenovolegionlinux-kmod-${TAG}-x86_64 && rm --recursive lenovolegionlinux-kmod-${TAG}-x86_64
 mv lenovolegionlinux-kmod-${TAG}-x86_64.tar.gz rpmbuild/SOURCES
 cd rpmbuild && rpmbuild --define "_topdir `pwd`" -bs SPECS/lenovolegionlinux.spec
-rpmbuild --nodeps --define "_topdir `pwd`" --rebuild SRPMS/dkms-lenovolegionlinux-${TAG}-0.src.rpm
+rpmbuild --define "_topdir `pwd`" --rebuild SRPMS/dkms-lenovolegionlinux-${TAG}-0.src.rpm
 mv RPMS/x86_64/dkms-lenovolegionlinux-${TAG}-0.x86_64.rpm ${BUILD_DIR}/
 
 #Build PYTHON RPM
@@ -54,7 +54,7 @@ cd rpmbuild
 
 #Use distrobox to build rpm on fedora
 sudo rpmbuild --define "_topdir `pwd`" -bs SPECS/lenovolegionlinux.spec
-sudo rpmbuild --nodeps --define "_topdir `pwd`" --rebuild SRPMS/python3-lenovolegionlinux-${TAG}-1.src.rpm
+sudo rpmbuild --define "_topdir `pwd`" --rebuild SRPMS/python3-lenovolegionlinux-${TAG}-1.src.rpm
 mv RPMS/noarch/python3-lenovolegionlinux-${TAG}-1.noarch.rpm ${BUILD_DIR}/
 
 #Move to repo
