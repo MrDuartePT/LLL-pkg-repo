@@ -29,8 +29,7 @@ cp -r ${REPODIR_LLL}/kernel_module ./lenovolegionlinux-kmod-${TAG}-x86_64
 sudo sed -i "s/_VERSION/${TAG}/g" ./lenovolegionlinux-kmod-${TAG}-x86_64/dkms.conf
 mv lenovolegionlinux-kmod-${TAG}-x86_64/lenovolegionlinux.spec rpmbuild/SPECS
 #Change version according to tag
-sed -i "s/version _VERSION/version ${TAG}/g" rpmbuild/SPECS/lenovolegionlinux.spec
-sed -i "s/unmangled_version _VERSION/unmangled_version ${TAG}/g" rpmbuild/SPECS/lenovolegionlinux.spec
+sed -i "s/_VERSION/${TAG}/g" rpmbuild/SPECS/lenovolegionlinux.spec
 
 tar --create --file lenovolegionlinux-kmod-${TAG}-x86_64.tar.gz lenovolegionlinux-kmod-${TAG}-x86_64 && rm --recursive lenovolegionlinux-kmod-${TAG}-x86_64
 mv lenovolegionlinux-kmod-${TAG}-x86_64.tar.gz rpmbuild/SOURCES
