@@ -41,5 +41,8 @@ sudo rpmbuild --define "_topdir $(pwd)" -bs SPECS/darkdetect.spec
 sudo rpmbuild --define "_topdir $(pwd)" --rebuild SRPMS/python3-darkdetect-${TAG}-1.src.rpm
 mv RPMS/noarch/python3-darkdetect-${TAG}-1.noarch.rpm ${BUILD_DIR}/
 
+#Test Install
+rpm -i ${BUILD_DIR}/python3-darkdetect-${TAG}-1.noarch.rpm
+
 #Move to repo
 cp ${BUILD_DIR}/python3-darkdetect-${TAG}-1.noarch.rpm ${REPODIR}/fedora/packages

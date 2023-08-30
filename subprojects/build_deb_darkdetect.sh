@@ -37,5 +37,8 @@ cd deb_dist/darkdetect-${TAG}
 sudo dpkg-buildpackage -uc -us
 cp ../python3-darkdetect_${TAG}-1_all.deb ${BUILD_DIR}
 
+#Test Install
+sudo apt-get install ${BUILD_DIR}/python3-darkdetect_${TAG}-1_all.deb
+
 #Move to repo
 cp ${BUILD_DIR}/python3-darkdetect_${TAG}-1_all.deb ${REPODIR}/ubuntu

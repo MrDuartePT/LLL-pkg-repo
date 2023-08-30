@@ -63,6 +63,9 @@ sudo EDITOR=/bin/true dpkg-source -q --commit . p1
 sudo dpkg-buildpackage -uc -us
 sudo mv ../python3-legion-linux_${TAG}-1_all.deb ${BUILD_DIR}
 
+#Test Install
+sudo apt-get install ${BUILD_DIR}/python3-legion-linux_${TAG}-1_all.deb
+
 #Copy to ubuntu folder
 sudo cp ${BUILD_DIR}/lenovolegionlinux-dkms_${TAG}_amd64.deb ${REPODIR}/ubuntu
 sudo cp ${BUILD_DIR}/python3-legion-linux_${TAG}-1_all.deb ${REPODIR}/ubuntu

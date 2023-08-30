@@ -57,6 +57,9 @@ sudo rpmbuild --define "_topdir $(pwd)" -bs SPECS/lenovolegionlinux.spec
 sudo rpmbuild --define "_topdir $(pwd)" --rebuild SRPMS/python3-lenovolegionlinux-${TAG}-1.src.rpm
 mv RPMS/noarch/python3-lenovolegionlinux-${TAG}-1.noarch.rpm ${BUILD_DIR}/
 
+#Test Install
+rpm -i ${BUILD_DIR}/python3-lenovolegionlinux-${TAG}-1.noarch.rpm
+
 #Move to repo
 cp ${BUILD_DIR}/dkms-lenovolegionlinux-${TAG}-0.x86_64.rpm ${REPODIR}/fedora/packages
 cp ${BUILD_DIR}/python3-lenovolegionlinux-${TAG}-1.noarch.rpm ${REPODIR}/fedora/packages
