@@ -7,7 +7,7 @@ set -ex
 
 #GET TAG (USE THIS WHEN STABLE RELEASE GET OUT)
 cd ${REPODIR_LLL}
-TAG=$(git describe --abbrev=0 | sed 's/[^0-9.]*//g')
+TAG=$(git describe --tags --abbrev=0 | sed 's/[^0-9.]*//g')
 cd ${REPODIR}
 DKMSDIR=/usr/src/lenovolegionlinux-${TAG}
 

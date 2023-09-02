@@ -35,6 +35,7 @@ jobs:
       with:
         path: ./LLL-pkg-repo
         submodules: recursive
+        fetch-depth: 0
 
     - name: Update submodules
       run: |
