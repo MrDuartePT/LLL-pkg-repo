@@ -46,6 +46,22 @@ Section: misc
 Priority: optional
 Description: lenovolegionlinux driver in DKMS format.
 
+Package: lenovolegionlinux-dkms
+Version: 0.0.9
+Architecture: amd64
+Maintainer: Dynamic Kernel Modules Support Team <pkg-dkms-maint@lists.alioth.debian.org>
+Installed-Size: 297
+Depends: dkms (>= 1.95)
+Provides: lenovolegionlinux-modules (= 0.0.9)
+Filename: ./lenovolegionlinux-dkms_0.0.9_amd64.deb
+Size: 47612
+MD5sum: 5b5596e9bdd18b6cf3fcd9fc62edc2c6
+SHA1: 5ee173feaac449d02d9781831e7f807f8bd83076
+SHA256: 10bae88da4b8e5c33131237a141ab3286b846d180710b6ccc65f00b436ad3ccb
+Section: misc
+Priority: optional
+Description: lenovolegionlinux driver in DKMS format.
+
 Package: python3-darkdetect
 Source: darkdetect
 Version: 0.8.0-1
@@ -54,10 +70,10 @@ Maintainer: None <None>
 Installed-Size: 36
 Depends: python3:any
 Filename: ./python3-darkdetect_0.8.0-1_all.deb
-Size: 7428
-MD5sum: 8928f1aa874582cf90175e7576f80d7c
-SHA1: ae6f6a1ea2c1b0695d6cf04c11bb7b7fb32aa37d
-SHA256: a18995fb313ef86aa000ee20914440942fb305220980de452dcdbd548ceffd01
+Size: 7434
+MD5sum: 68c0e82930955057434b003f07221eca
+SHA1: 95a5bf1d8d3c27db1a6152db3226274480ad57a9
+SHA256: 760db4d619659f395b7dd8e4273c57191542a6687da1c803afa02c0604998444
 Section: python
 Priority: optional
 Homepage: https://github.com/albertosottile/darkdetect
@@ -131,6 +147,24 @@ Size: 31232
 MD5sum: be924625bc79b37b4cd24252b8b00fe9
 SHA1: 83317caa5316dce5d73eb94fdd4d4de7c06b6aa1
 SHA256: 7158ad899048e4cbbcd783006e003b257677a6e292ea68bf5cfc34d7292bfc49
+Section: python
+Priority: optional
+Homepage: https://github.com/johnfanv2/LenovoLegionLinux
+Description: Control Lenovo Legion laptop
+ See documenation of LenovoLegionLinux
+
+Package: python3-legion-linux
+Source: legion-linux
+Version: 0.0.9-1
+Architecture: all
+Maintainer: None <None>
+Installed-Size: 211
+Depends: python3-argcomplete, python3-darkdetect, python3-pyqt5, python3-yaml, python3:any
+Filename: ./python3-legion-linux_0.0.9-1_all.deb
+Size: 31218
+MD5sum: 00c067b0162f9602d71330b45f34277c
+SHA1: 9aafae9712b9b8bf859254cb3e597db8cf50e706
+SHA256: 9eb9b6df089f39a98d7a9da1acfffdc526cb55f64c8cce1731796edbfba97091
 Section: python
 Priority: optional
 Homepage: https://github.com/johnfanv2/LenovoLegionLinux
