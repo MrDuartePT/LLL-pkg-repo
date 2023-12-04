@@ -22,7 +22,7 @@ jobs:
   build-rpms:
     runs-on: ubuntu-latest
     container:
-      image: fedora:38
+      image: fedora:39
     steps:
     - name: Install Dependencies in Container
       run: |
