@@ -20,7 +20,7 @@ sudo apt install lenovolegionlinux-dkms python3-darkdetect python3-legion-linux
 Fedora was moved to copr 
 Remove Fedora repo before using copr:
 ```bash
-sudo dnf uninstall dkms-lenovolegionlinux python-darkdetect python-lenovolegionlinux
+sudo dnf remove dkms-lenovolegionlinux python-darkdetect python-lenovolegionlinux
 sudo dnf config-manager --set-disabled LLL-pkg-repo
 rm /etc/yum.repos.d/LLL.repo
 ```
