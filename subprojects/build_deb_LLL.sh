@@ -41,6 +41,10 @@ sudo mv /var/lib/dkms/lenovolegionlinux/${TAG}/deb/lenovolegionlinux-dkms_${TAG}
 echo "Dkms deb located at ${BUILD_DIR}/lenovolegionlinux-dkms_${TAG}_amd64.deb"
 ##
 
+##BUILD Legiond before deb
+cd ${REPODIR_LLL}/extra/service/legiond
+make
+
 ##BUILD PYTHON DEB
 cd ${REPODIR_LLL}/python/legion_linux
 #Change version according to tag
@@ -52,10 +56,22 @@ sudo python3 setup.py --command-packages=stdeb.command sdist_dsc
 cd deb_dist/legion-linux-${TAG}
 
 ##Add to debial install
-sudo cp -R ${REPODIR_LLL}/extra/service/legion-linux.service .
-sudo cp -R ${REPODIR_LLL}/extra/service/legion-linux.path .
-echo "legion-linux.service /etc/systemd/system/" | sudo tee -a debian/install
-echo "legion-linux.path /lib/systemd/system/" | sudo tee -a debian/install
+sudo cp -R ${REPODIR_LLL}/extra/service/legiond.service .
+sudo cp -R ${REPODIR_LLL}/extra/service/legiond-onresume.service .
+sudo cp -R ${REPODIR_LLL}/extra/service/legiond-cpuset.service .
+sudo cp -R ${REPODIR_LLL}/extra/service/legiond-cpuset.timer .
+sudo mv ${REPODIR_LLL}/extra/service/legiond/legiond .
+sudo mv ${REPODIR_LLL}/extra/service/legiond/legiond-cli .
+sudo cp -R ${REPODIR_LLL}/extra/acpi/events/legion_ac .
+sudo cp -R ${REPODIR_LLL}/extra/acpi/events/legion_ppd .
+echo "legiond.service /etc/systemd/system/" | sudo tee -a debian/install
+echo "legiond-onresume.service /etc/systemd/system/" | sudo tee -a debian/install
+echo "legiond-cpuset.service /etc/systemd/system/" | sudo tee -a debian/install
+echo "legiond-cpuset.timer /etc/systemd/system/" | sudo tee -a debian/install
+echo "legiond /usr/bin/legiond" | sudo tee -a debian/install
+echo "legiond-cli /usr/bin/legiond_cli" | sudo tee -a debian/install
+echo "legion_ac /etc/acpi/events/legion_ac" | sudo tee -a debian/install
+echo "legion_ppd /etc/acpi/events/legion_ppd" | sudo tee -a debian/install
 sudo EDITOR=/bin/true dpkg-source -q --commit . p1
 
 # Build package
