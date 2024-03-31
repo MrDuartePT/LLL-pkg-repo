@@ -1,4 +1,20 @@
 Package: lenovolegionlinux-dkms
+Version: 0.0.13
+Architecture: amd64
+Maintainer: Dynamic Kernel Modules Support Team <pkg-dkms-maint@lists.alioth.debian.org>
+Installed-Size: 263
+Depends: dkms (>= 1.95)
+Provides: lenovolegionlinux-modules (= 0.0.13)
+Filename: ./lenovolegionlinux-dkms_0.0.13_amd64.deb
+Size: 46928
+MD5sum: 8306ad29a9db7aa926a67bbdaff738dd
+SHA1: f7dbe4cf1da666c1be72e8244536093872c9a2e6
+SHA256: 10cfdd625ac7a7ed5d619fbb3d6c80acea60b4a67d42c1549942319c0c18d7e4
+Section: misc
+Priority: optional
+Description: lenovolegionlinux driver in DKMS format.
+
+Package: lenovolegionlinux-dkms
 Version: 0.0.6
 Architecture: amd64
 Maintainer: Dynamic Kernel Modules Support Team <pkg-dkms-maint@lists.alioth.debian.org>
@@ -71,9 +87,9 @@ Installed-Size: 36
 Depends: python3:any
 Filename: ./python3-darkdetect_0.8.0-1_all.deb
 Size: 7426
-MD5sum: 1eac47efb01913265b7e420acf5510f6
-SHA1: 6bcd34df4b482b3b712484f2bda99e91e02f23ab
-SHA256: e4eec652f3cbd97813e9d8f9b4fd5a766eb0f68858394228c4d4b0347229a50e
+MD5sum: 02a8aebd15db85cc0654e3dce1e293a8
+SHA1: 9f6944bcf7c34894c5f970ecaaf83d2708cd5d3c
+SHA256: c50407219f92504c90c4d9a5a9b2c3adbe806a447dea05369e5a906fa8b47b45
 Section: python
 Priority: optional
 Homepage: https://github.com/albertosottile/darkdetect
@@ -98,6 +114,24 @@ Description: Detect OS Dark Mode from Python
  'Dark'
  .
  >>> darkdetect.isDark()
+
+Package: python3-legion-linux
+Source: legion-linux
+Version: 0.0.13-1
+Architecture: all
+Maintainer: None <None>
+Installed-Size: 251
+Depends: python3-argcomplete, python3-darkdetect, python3-pyqt5, python3-yaml, python3:any
+Filename: ./python3-legion-linux_0.0.13-1_all.deb
+Size: 37036
+MD5sum: c6699f7b69a8a345a411c348940861c1
+SHA1: 5af09e8c84f7fa04e8b11f5d15c5aa0c3f91d49a
+SHA256: 4bdbd302872291ec32286d1128dd736c49ee9128a09155ac3f4a21e7d34cafee
+Section: python
+Priority: optional
+Homepage: https://github.com/johnfanv2/LenovoLegionLinux
+Description: Control Lenovo Legion laptop
+ See documenation of LenovoLegionLinux
 
 Package: python3-legion-linux
 Source: legion-linux
