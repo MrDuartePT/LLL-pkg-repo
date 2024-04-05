@@ -5,6 +5,8 @@ REPODIR_LLL="${REPODIR}/subprojects/LenovoLegionLinux"
 BUILD_DIR=/tmp/deb
 set -ex
 
+sudo apt-get install libinih-dev
+
 #GET TAG (USE THIS WHEN STABLE RELEASE GET OUT)
 cd ${REPODIR_LLL}
 TAG=$(git describe --tags --abbrev=0 | sed 's/[^0-9.]*//g')
@@ -61,7 +63,7 @@ sudo cp -R ${REPODIR_LLL}/extra/service/legiond-onresume.service .
 sudo cp -R ${REPODIR_LLL}/extra/service/legiond-cpuset.service .
 sudo cp -R ${REPODIR_LLL}/extra/service/legiond-cpuset.timer .
 sudo mv ${REPODIR_LLL}/extra/service/legiond/legiond .
-sudo mv ${REPODIR_LLL}/extra/service/legiond/legiond-cli .
+sudo mv ${REPODIR_LLL}/extra/service/legiond/legiond-ctl .
 sudo cp -R ${REPODIR_LLL}/extra/acpi/events/legion_ac .
 sudo cp -R ${REPODIR_LLL}/extra/acpi/events/legion_ppd .
 echo "legiond.service /etc/systemd/system/" | sudo tee -a debian/install
@@ -69,7 +71,7 @@ echo "legiond-onresume.service /etc/systemd/system/" | sudo tee -a debian/instal
 echo "legiond-cpuset.service /etc/systemd/system/" | sudo tee -a debian/install
 echo "legiond-cpuset.timer /etc/systemd/system/" | sudo tee -a debian/install
 echo "legiond /usr/bin/legiond" | sudo tee -a debian/install
-echo "legiond-cli /usr/bin/legiond_cli" | sudo tee -a debian/install
+echo "legiond-cli /usr/bin/legiond_ctl" | sudo tee -a debian/install
 echo "legion_ac /etc/acpi/events/legion_ac" | sudo tee -a debian/install
 echo "legion_ppd /etc/acpi/events/legion_ppd" | sudo tee -a debian/install
 sudo EDITOR=/bin/true dpkg-source -q --commit . p1
