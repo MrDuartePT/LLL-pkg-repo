@@ -71,7 +71,7 @@ echo "legiond-onresume.service /etc/systemd/system/" | sudo tee -a debian/instal
 echo "legiond-cpuset.service /etc/systemd/system/" | sudo tee -a debian/install
 echo "legiond-cpuset.timer /etc/systemd/system/" | sudo tee -a debian/install
 echo "legiond /usr/bin/legiond" | sudo tee -a debian/install
-echo "legiond-cli /usr/bin/legiond_ctl" | sudo tee -a debian/install
+echo "legiond-ctl /usr/bin/legiond_ctl" | sudo tee -a debian/install
 echo "legion_ac /etc/acpi/events/legion_ac" | sudo tee -a debian/install
 echo "legion_ppd /etc/acpi/events/legion_ppd" | sudo tee -a debian/install
 sudo EDITOR=/bin/true dpkg-source -q --commit . p1
