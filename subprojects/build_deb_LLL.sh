@@ -5,7 +5,7 @@ REPODIR_LLL="${REPODIR}/subprojects/LenovoLegionLinux"
 BUILD_DIR=/tmp/deb
 set -ex
 
-sudo apt-get install libinih-dev
+sudo apt-get install libinih-dev clang
 
 #GET TAG (USE THIS WHEN STABLE RELEASE GET OUT)
 cd ${REPODIR_LLL}
