@@ -45,7 +45,7 @@ echo "Dkms deb located at ${BUILD_DIR}/lenovolegionlinux-dkms_${TAG}_amd64.deb"
 
 ##BUILD Legiond before deb
 cd ${REPODIR_LLL}/extra/service/legiond
-make
+CC=clang make
 
 ##BUILD PYTHON DEB
 cd ${REPODIR_LLL}/python/legion_linux
