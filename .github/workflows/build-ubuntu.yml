@@ -32,7 +32,7 @@ jobs:
       run: |
         git submodule update --init
         git pull --recurse-submodules
-        git submodule update --remote --recursive
+        git submodule update --remote --merge
       shell: bash
 
     - name: Install Dependencies
