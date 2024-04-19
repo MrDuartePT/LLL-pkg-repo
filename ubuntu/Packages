@@ -22,10 +22,10 @@ Installed-Size: 263
 Depends: dkms (>= 1.95)
 Provides: lenovolegionlinux-modules (= 0.0.15)
 Filename: ./lenovolegionlinux-dkms_0.0.15_amd64.deb
-Size: 46914
-MD5sum: 8d8a93b9d6a581ca4ca5fdf946c0d9ce
-SHA1: 6348f0aabb8a5af44d335a0270fec2c20c479365
-SHA256: 681324cf60b24302b787f9bfefec82020126d3715ead65084116e4696c2b5852
+Size: 46922
+MD5sum: 95ba0cf866960eb27ccbb9c7b8e3829c
+SHA1: a8dc6f07d7c683e9bdf1953784966974f58d5dcb
+SHA256: e7142baeffc925189d3a4b5722a12a77c180d01aade54672141e1779984a6ced
 Section: misc
 Priority: optional
 Description: lenovolegionlinux driver in DKMS format.
@@ -102,10 +102,10 @@ Maintainer: None <None>
 Installed-Size: 36
 Depends: python3:any
 Filename: ./python3-darkdetect_0.8.0-1_all.deb
-Size: 7420
-MD5sum: deafb3d4c58315511361bac7533242ac
-SHA1: 696b9536f3d9b3a5661a8959bbf1aec56bd1f584
-SHA256: 7323348b5faa55a243f21a2bc30e074423dd4bb01130b64697198c16c64acc94
+Size: 7414
+MD5sum: b855bd3b49bdb3fb44500098f660590e
+SHA1: b593a418ebc1e9f6c18aad0e370cf3fc273701ed
+SHA256: 0390922553ce198da1d50a7eb493496a4a1320c03570b0e3457c45771e596076
 Section: python
 Priority: optional
 Homepage: https://github.com/albertosottile/darkdetect
@@ -157,10 +157,10 @@ Maintainer: None <None>
 Installed-Size: 253
 Depends: python3-argcomplete, python3-darkdetect, python3-pyqt5, python3-yaml, python3:any
 Filename: ./python3-legion-linux_0.0.15-1_all.deb
-Size: 38532
-MD5sum: b5642d2a85b83da1f51f18e1464f2778
-SHA1: 52c375c0c19497c00deaa7f6d7fb7c0b4c116ea9
-SHA256: 50cc07cdd6355199f8319eb9fb75acce42d44d5fd2bd49d50c883f72760af7eb
+Size: 38550
+MD5sum: 042a39f6d3851fcd2f5a5e237eae6aaf
+SHA1: 303b46a4b6ae719e819bed4c09ffd894b2870cf2
+SHA256: cd193f0a6b73a5f722db5c849075585ee3366437dbe005b865e329edb898fbaf
 Section: python
 Priority: optional
 Homepage: https://github.com/johnfanv2/LenovoLegionLinux
