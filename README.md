@@ -1,3 +1,6 @@
+# This ppa is archived
+Please use the debian packages, in the future may be added to the ubuntu repos: https://tracker.debian.org/pkg/lenovolegionlinux
+
 ![build ubuntu workflow](https://github.com/MrDuartePT/LLL-pkg-repo/actions/workflows/build-ubuntu.yml/badge.svg)
 
 # LenovoLegionLinux package for Ubuntu and Fedora
